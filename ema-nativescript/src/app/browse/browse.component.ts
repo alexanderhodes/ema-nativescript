@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {ConnectivityService} from "~/app/shared/connectivity.service";
 import {PhoneService} from "~/app/shared/phone.service";
+import * as Toast from "nativescript-toast";
+import {GeolocationService} from "~/app/shared/geolocation.service";
 
 @Component({
     selector: "Browse",
@@ -9,7 +11,8 @@ import {PhoneService} from "~/app/shared/phone.service";
 export class BrowseComponent implements OnInit {
 
     constructor(private connectivityService: ConnectivityService,
-                private phoneService: PhoneService) {
+                private phoneService: PhoneService,
+                private geolocationService: GeolocationService) {
         // Use the component constructor to inject providers.
         const connectionType = this.connectivityService.checkConnectionType();
 
@@ -21,7 +24,11 @@ export class BrowseComponent implements OnInit {
     }
 
     call(): void {
+        Toast.makeText('Hello World', 'long').show();
+
         const number = "+49697912293";
-        this.phoneService.call(number);
+//        this.phoneService.call(number);
+
+        this.geolocationService.getCurrentLocation();
     }
 }
