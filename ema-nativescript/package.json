@@ -12,7 +12,9 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "scripts": {
-    "lint": "tslint \"src/**/*.ts\""
+    "lint": "tslint \"src/**/*.ts\"",
+    "devices": "tns devices",
+    "run": "tns run --device"
   },
   "dependencies": {
     "@angular/animations": "~8.2.0",
