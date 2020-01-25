@@ -13,8 +13,8 @@ Zunächst müsst ihr in den Entwickleroptionen des Smartphones das USB-Debugging
 Um den Device Identifier zu ermitteln müsst ihr den folgenden Befehl ausführen. Der Device Identifier wird benötigt, um die App auf dem Smartphone auszuführen: `tns device`
 Als Ergebnis bekommt ihr eine Tabelle mit allen verbundenen Geräten:
 
-No │ Device Name │ Platform │ Device Identifier │ Type   │ Status
- 1 │ FP2         │ Android  │ fa8f674           │ Device │ Connected
+| No │ Device Name │ Platform │ Device Identifier │ Type   │ Status
+|  1 │ FP2         │ Android  │ fa8f674           │ Device │ Connected
 
 Der Device Identifier muss nun verwendet werden, um die App mit dem Befehl `tns run` zu starten. Dort wird noch ein Parameter für den Device Identifier mitgegeben.
 Der Befehl sieht schlussendlich wie folgt aus: `tns run --device fa8f674`
