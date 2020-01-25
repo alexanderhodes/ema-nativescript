@@ -2,7 +2,13 @@
     <Label class="action-bar-title" text="Search"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf002;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+<GridLayout rows="auto, auto, auto" columns="*" class="page">
+    <GridLayout row="0" columns="50, auto, *" rows="50, auto, *">
+        <Label text="GPS Tracking" row="0" col="0" backgroundColor="red"></Label>
+        <Button text="track" row="0" col="1" colSpan="2" (tap)="trackPosition()"></Button>
+    </GridLayout>
+    <GridLayout row="1" columns="100, *">
+        <Label col="0" text="Eingabe:"></Label>
+        <TextField col="1" [(ngModel)]="name" (returnPress)="onReturnPress($event)"></TextField>
+    </GridLayout>
 </GridLayout>
