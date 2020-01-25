@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {ConnectivityService} from "~/app/shared/connectivity.service";
-import {PhoneService} from "~/app/shared/phone.service";
+import {ConnectivityService} from "~/app/shared/services/connectivity.service";
+import {PhoneService} from "~/app/shared/services/phone.service";
 import * as Toast from "nativescript-toast";
-import {GeolocationService} from "~/app/shared/geolocation.service";
+import {GeolocationService} from "~/app/shared/services/geolocation.service";
 
 @Component({
     selector: "Browse",

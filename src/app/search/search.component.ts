@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {PlatformService} from "~/app/shared/platform.service";
-import {GeolocationService} from "~/app/shared/geolocation.service";
+import {PlatformService} from "~/app/shared/services/platform.service";
+import {GeolocationService} from "~/app/shared/services/geolocation.service";
 import {TextField} from "tns-core-modules/ui/text-field";
-import {inputType} from "tns-core-modules/ui/dialogs";
-import text = inputType.text;
+import {NotificationService} from "~/app/shared/services/notification.service";
 
 @Component({
     selector: "Search",
@@ -14,9 +13,11 @@ export class SearchComponent implements OnInit {
     name: string;
 
     constructor(private platformService: PlatformService,
-                private geoLocationService: GeolocationService) {
+                private geoLocationService: GeolocationService,
+                private notificationService: NotificationService) {
         // Use the constructor to inject services.
         this.platformService.getProperties();
+//        this.notificationService.schedule();
     }
 
     ngOnInit(): void {
