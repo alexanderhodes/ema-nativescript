@@ -5,7 +5,7 @@ import * as Toast from "nativescript-toast";
 import {GeolocationService} from "~/app/shared/services/geolocation.service";
 
 @Component({
-    selector: "Browse",
+    selector: "Plus",
     templateUrl: "./plus.component.html"
 })
 export class PlusComponent implements OnInit {

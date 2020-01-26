@@ -9,8 +9,8 @@
     font-size: 36;
 }
 
-.t-24 {
-    font-size: 24;
+.t-16 {
+    font-size: 16;
 }
 
 // Common page class
@@ -34,4 +34,17 @@
 //Action bar
 ActionBar .action-bar-title {
     horizontal-align: center;
+}
+
+TabStripItem:active {
+    background-color: $primary;
+    color: $page-icon-color;
+}
+TabStripItem {
+    background-color: $background;
+    color: $primary;
+}
+
+.icon {
+    border-radius: 60;
 }

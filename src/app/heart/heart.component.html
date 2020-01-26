@@ -2,6 +2,19 @@
     <Label class="action-bar-title" text="Heart"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf1ea;"></Label>
+<ScrollView  orientation="vertical" class="page page-content">
+<GridLayout rows="auto, *" columns="*">
+    <GridLayout row="0" col="0" rows="60" columns="100, *">
+        <Image row="0" col="0" [src]="accountImage" class="icon"></Image>
+        <StackLayout row="0" col="1">
+            <Label text="Vorname Nachname" class="t-16"></Label>
+            <Label text="Position" class="t-16"></Label>
+        </StackLayout>
+    </GridLayout>
+        <GridLayout row="1" col="0" [rows]="rows()" columns="*, *, *">
+            <Image *ngFor="let image of images; index as i" [row]="i / 3" [col]="i % 3"
+                   [src]="image" stretch="aspectFill" margin="4" (tap)="tappedImage(i)"
+                   [nsRouterLink]="['../image', i]"></Image>
+        </GridLayout>
 </GridLayout>
+</ScrollView>

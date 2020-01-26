@@ -1,34 +1,44 @@
 import { Component, OnInit } from "@angular/core";
-import {ConnectivityService} from "~/app/shared/services/connectivity.service";
-import {PhoneService} from "~/app/shared/services/phone.service";
 import * as Toast from "nativescript-toast";
-import {GeolocationService} from "~/app/shared/services/geolocation.service";
+import {ImageService} from "~/app/shared/services/image.service";
 
 @Component({
-    selector: "Browse",
+    selector: "Heart",
     templateUrl: "./heart.component.html"
 })
 export class HeartComponent implements OnInit {
 
-    constructor(private connectivityService: ConnectivityService,
-                private phoneService: PhoneService,
-                private geolocationService: GeolocationService) {
-        // Use the component constructor to inject providers.
-        const connectionType = this.connectivityService.checkConnectionType();
+//    items: { text: string, backgroundColor: string }[];
+    images: string[];
+    count: number;
+    accountImage: string;
 
-        console.log('connectionType in browse-module', connectionType);
+    constructor(private imageService: ImageService) {
+        // Use the component constructor to inject providers.
+        this.images = [];
     }
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
+        this.images = this.imageService.findImages();
+
+        this.count = this.images.length;
+
+        this.accountImage = '~/images/account/photo-of-man-holding-phone-3475632.jpg';
     }
 
-    call(): void {
-        Toast.makeText('Hello World', 'long').show();
+    rows(): string {
+        let parts = this.count / 3;
+        let rows = '';
 
-        const number = "+49697912293";
-//        this.phoneService.call(number);
+        for (let i = 0; i < parts; i++) {
+            rows += '120' + ((i+1) < parts ? ',' : '');
+        }
 
-        this.geolocationService.getCurrentLocation();
+        return rows;
+    }
+
+    tappedImage(index: number): void {
+//        Toast.makeText(`tapped ${index}`, 'short').show();
     }
 }
