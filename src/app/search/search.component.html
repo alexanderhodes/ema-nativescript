@@ -2,13 +2,29 @@
     <Label class="action-bar-title" text="Search"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, auto, auto" columns="*" class="page">
+<GridLayout rows="auto, auto, auto, auto, auto" columns="*" class="page">
     <GridLayout row="0" columns="50, auto, *" rows="50, auto, *">
         <Label text="GPS Tracking" row="0" col="0" backgroundColor="red"></Label>
         <Button text="track" row="0" col="1" colSpan="2" (tap)="trackPosition()"></Button>
     </GridLayout>
-    <GridLayout row="1" columns="100, *">
+    <GridLayout row="1" columns="auto, auto">
+        <Label row="0" col="0">Longitude</Label>
+        <Label row="0" col="1" [text]="longitude"></Label>
+    </GridLayout>
+    <GridLayout row="2" columns="auto, auto">
+        <Label row="0" col="0">Latitude</Label>
+        <Label row="0" col="1" [text]="latitude"></Label>
+    </GridLayout>
+    <GridLayout row="3" columns="auto, auto">
+        <Label row="0" col="0">Timestamp</Label>
+        <Label row="0" col="1" [text]="timestamp | date"></Label>
+    </GridLayout>
+    <GridLayout row="4" columns="100, *">
         <Label col="0" text="Eingabe:"></Label>
         <TextField col="1" [(ngModel)]="name" (returnPress)="onReturnPress($event)"></TextField>
+    </GridLayout>
+    <GridLayout row="4" columns="100, *">
+        <Label col="0" text="Foto"></Label>
+        <Button text="take Foto" row="0" col="1" colSpan="2" (tap)="takePhoto()"></Button>
     </GridLayout>
 </GridLayout>

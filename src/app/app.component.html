@@ -16,16 +16,19 @@
                 Note TabStripItem will only accept single Label and/or single Image elements that it
                 will "adopt"; any other layout elements you try to specify will be ignored
             -->
-            <Label text="Home"></Label>
-            <Image src="font://&#xf015;" class="fa t-36"></Image>
+            <Image src="font://&#xf015;" class="fa t-24"></Image>
         </TabStripItem>
         <TabStripItem>
-            <Label text="Browse"></Label>
-            <Image src="font://&#xf1ea;" class="fa t-36"></Image>
+            <Image src="font://&#xf002;" class="fa t-24"></Image>
         </TabStripItem>
         <TabStripItem>
-            <Label text="Search"></Label>
-            <Image src="font://&#xf002;" class="fa t-36"></Image>
+            <Image src="font://&#xf0fe;" class="fa t-24"></Image>
+        </TabStripItem>
+        <TabStripItem>
+            <Image src="font://&#xf004;" class="fa t-24"></Image>
+        </TabStripItem>
+        <TabStripItem>
+            <Image src="font://&#xf007;" class="fa t-24"></Image>
         </TabStripItem>
     </TabStrip>
 
@@ -34,10 +37,19 @@
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="browseTab"></page-router-outlet>
+        <page-router-outlet name="searchTab"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="searchTab"></page-router-outlet>
+        <page-router-outlet name="plusTab"></page-router-outlet>
     </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="heartTab"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="userTab"></page-router-outlet>
+    </TabContentItem>
+
 </BottomNavigation>

@@ -4,6 +4,9 @@ import {GeolocationService} from "~/app/shared/services/geolocation.service";
 import {TextField} from "tns-core-modules/ui/text-field";
 import {NotificationService} from "~/app/shared/services/notification.service";
 import {FileService} from "~/app/shared/services/file.service";
+import * as geolocation from "nativescript-geolocation";
+import * as Camera from "nativescript-camera";
+import { Image } from "tns-core-modules/ui/image";
 
 @Component({
     selector: "Search",
@@ -12,6 +15,9 @@ import {FileService} from "~/app/shared/services/file.service";
 export class SearchComponent implements OnInit {
 
     name: string;
+    longitude: number;
+    latitude: number;
+    timestamp: Date;
 
     constructor(private platformService: PlatformService,
                 private geoLocationService: GeolocationService,
@@ -27,7 +33,25 @@ export class SearchComponent implements OnInit {
     }
 
     trackPosition(): void {
-        this.geoLocationService.getCurrentLocation();
+        console.log('trackPosition');
+        this.geoLocationService.getCurrentLocation()
+            .pipe()
+            .subscribe((res: geolocation.Location) => {
+                this.latitude = res.latitude;
+                this.longitude = res.longitude;
+                this.timestamp = res.timestamp;
+            });
+    }
+
+    takePhoto(): void {
+        Camera.takePicture().
+        then((imageAsset) => {
+            console.log("Result is an image asset instance");
+            let image = new Image();
+            image.src = imageAsset;
+        }).catch((err) => {
+            console.log("Error -> " + err.message);
+        });
     }
 
     onReturnPress(event: any): void {

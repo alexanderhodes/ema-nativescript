@@ -6,9 +6,9 @@ import {GeolocationService} from "~/app/shared/services/geolocation.service";
 
 @Component({
     selector: "Browse",
-    templateUrl: "./browse.component.html"
+    templateUrl: "./user.component.html"
 })
-export class BrowseComponent implements OnInit {
+export class UserComponent implements OnInit {
 
     constructor(private connectivityService: ConnectivityService,
                 private phoneService: PhoneService,
