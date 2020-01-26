@@ -11,7 +11,7 @@
                 <Label text="Position" class="t-16"></Label>
             </StackLayout>
         </GridLayout>
-        <GridLayout row="1" col="0" rows="40" columns="*, *">
+        <GridLayout row="1" col="0" rows="30" columns="*, *">
             <Label row="0" col="0" text="&#xf00a;" class="fa t-24" style="text-align: center;"
                    (tap)="toggleDisplay()"></Label>
             <Label row="0" col="1" text="&#xf03a;" class="fa t-24" style="text-align: center;"
@@ -21,6 +21,9 @@
             <Image *ngFor="let image of images; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"
                    [src]="image" stretch="aspectFill" margin="4" (tap)="tappedImage(i)"
                    [nsRouterLink]="['../image', i]"></Image>
+        </GridLayout>
+        <GridLayout *ngIf="!displayGrid" row="2" col="0">
+            <Label text="Liste"></Label>
         </GridLayout>
     </GridLayout>
 </ScrollView>
