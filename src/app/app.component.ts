@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { isAndroid } from "tns-core-modules/platform";
 
 @Component({
     selector: "ns-app",
