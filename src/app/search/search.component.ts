@@ -7,6 +7,8 @@ import {FileService} from "~/app/shared/services/file.service";
 import * as geolocation from "nativescript-geolocation";
 import * as Camera from "nativescript-camera";
 import { Image } from "tns-core-modules/ui/image";
+import {WhatThreeWordsService} from "~/app/shared/services/what.three.words.service";
+import {WhatsThreeWords} from "~/app/shared/models/what.three.words.model";
 
 @Component({
     selector: "Search",
@@ -18,11 +20,13 @@ export class SearchComponent implements OnInit {
     longitude: number;
     latitude: number;
     timestamp: Date;
+    words: string;
 
     constructor(private platformService: PlatformService,
                 private geoLocationService: GeolocationService,
                 private notificationService: NotificationService,
-                private fileService: FileService) {
+                private fileService: FileService,
+                private whatThreeWordsService: WhatThreeWordsService) {
         // Use the constructor to inject services.
         this.platformService.getProperties();
 //        this.notificationService.schedule();
@@ -64,5 +68,14 @@ export class SearchComponent implements OnInit {
         const content = 'Das ist ein Test, um in eine Datei zu schreiben.';
         this.fileService.createFile(fileName, content);
         this.fileService.readFile(fileName);
+    }
+
+    findWordsByPosition() {
+        if (this.longitude && this.latitude) {
+            this.whatThreeWordsService.get(this.longitude, this.latitude).subscribe((response: WhatsThreeWords) => {
+                console.log('words', response.words);
+                this.words = response.words;
+            });
+        }
     }
 }
