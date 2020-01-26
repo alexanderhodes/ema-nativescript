@@ -3,7 +3,7 @@
 </ActionBar>
 
 <ScrollView  orientation="vertical" class="page page-content">
-    <GridLayout rows="auto, auto, *" columns="*">
+    <GridLayout rows="60, 30, *" columns="*">
         <GridLayout row="0" col="0" rows="60" columns="100, *">
             <Image row="0" col="0" [src]="accountImage" class="icon"></Image>
             <StackLayout row="0" col="1">
@@ -18,7 +18,7 @@
                    (tap)="toggleDisplay()"></Label>
         </GridLayout>
         <GridLayout row="2" col="0" [rows]="rows()" columns="*, *, *">
-            <Image *ngFor="let image of images; index as i" [row]="i / 3" [col]="i % 3"
+            <Image *ngFor="let image of images; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"
                    [src]="image" stretch="aspectFill" margin="4" (tap)="tappedImage(i)"
                    [nsRouterLink]="['../image', i]"></Image>
         </GridLayout>

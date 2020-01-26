@@ -39,6 +39,14 @@ export class HeartComponent implements OnInit {
         return rows;
     }
 
+    rowForIndex(index: number): string {
+        return `${index / 3}`;
+    }
+
+    colForIndex(index: number): string {
+        return `${index % 3}`;
+    }
+
     tappedImage(index: number): void {
 //        Toast.makeText(`tapped ${index}`, 'short').show();
     }
