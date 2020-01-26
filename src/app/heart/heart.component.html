@@ -2,28 +2,42 @@
     <Label class="action-bar-title" text="Heart"></Label>
 </ActionBar>
 
-<ScrollView  orientation="vertical" class="page page-content">
-    <GridLayout rows="60, 30, *" columns="*">
-        <GridLayout row="0" col="0" rows="60" columns="100, *">
-            <Image row="0" col="0" [src]="accountImage" class="icon"></Image>
+<ScrollView orientation="vertical" class="page page-content" (swipe)="onSwipe($event)">
+    <GridLayout rows="64, 30, *" columns="*" marginTop="8">
+        <GridLayout row="0" col="0" rows="64" columns="100, *" marginBottom="4">
+            <Image row="0" col="0" stretch="aspectFill" [src]="accountImage" class="icon"></Image>
             <StackLayout row="0" col="1">
                 <Label text="Vorname Nachname" class="t-16"></Label>
                 <Label text="Position" class="t-16"></Label>
             </StackLayout>
         </GridLayout>
-        <GridLayout row="1" col="0" rows="30" columns="*, *">
+        <GridLayout row="1" col="0" rows="30" columns="*, *"
+                    style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
             <Label row="0" col="0" text="&#xf00a;" class="fa t-24" style="text-align: center;"
-                   (tap)="toggleDisplay()"></Label>
+                   (tap)="toggleDisplay(true)" [color]="this.displayGrid ? '#02556E' : '#737373'"></Label>
             <Label row="0" col="1" text="&#xf03a;" class="fa t-24" style="text-align: center;"
-                   (tap)="toggleDisplay()"></Label>
+                   (tap)="toggleDisplay(false)" [color]="!this.displayGrid ? '#02556E' : '#737373'"></Label>
         </GridLayout>
-        <GridLayout row="2" col="0" [rows]="rows()" columns="*, *, *">
+        <GridLayout *ngIf="displayGrid" row="2" col="0" [rows]="rowsForGrid()" columns="*, *, *">
             <Image *ngFor="let image of images; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"
                    [src]="image" stretch="aspectFill" margin="4" (tap)="tappedImage(i)"
                    [nsRouterLink]="['../image', i]"></Image>
         </GridLayout>
-        <GridLayout *ngIf="!displayGrid" row="2" col="0">
-            <Label text="Liste"></Label>
+        <GridLayout *ngIf="!displayGrid" row="2" col="0" [rows]="rowsForList()">
+            <GridLayout [row]="i" rows="auto, *, 30" cols="*" *ngFor="let image of images; index as i" margin="4">
+                <Label row="0" col="0" [text]="i + ': Überschrift'"></Label>
+                <Image row="1" col="0" [src]="image" (doubletap)="toggleLike()"></Image>
+                <GridLayout row="2" col="0" columns="30, 30, 30, *, 30">
+                    <Label col="0" text="&#xf004;" class="fa t-24" style="text-align: center;"
+                           [color]="this.liked ? 'red' : '#737373'" (tap)="toggleLike()"></Label>
+                    <Label col="1" text="&#xf075;" class="fa t-24" style="text-align: center;"
+                           color="#737373"></Label>
+                    <Label col="2" text="&#xf064;" class="fa t-24" style="text-align: center;"
+                           color="#737373"></Label>
+                    <Label col="4" text="&#xf02e;" class="fa t-24" style="text-align: center;"
+                           color="#737373"></Label>
+                </GridLayout>
+            </GridLayout>
         </GridLayout>
     </GridLayout>
 </ScrollView>

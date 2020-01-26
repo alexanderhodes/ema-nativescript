@@ -34,4 +34,8 @@ export class ImageService {
         return index < images.length ? images[index] : null;
     }
 
+    count(): number {
+        return this.findImages().length;
+    }
+
 }

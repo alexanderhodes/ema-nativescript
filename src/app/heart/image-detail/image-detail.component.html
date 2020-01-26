@@ -3,6 +3,6 @@
     <Label class="action-bar-title" [text]="index"></Label>
 </ActionBar>
 
-<GridLayout>
+<GridLayout (swipe)="onSwipe($event)">
     <Image [src]="image"></Image>
 </GridLayout>
