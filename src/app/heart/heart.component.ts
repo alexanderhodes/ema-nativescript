@@ -8,14 +8,15 @@ import {ImageService} from "~/app/shared/services/image.service";
 })
 export class HeartComponent implements OnInit {
 
-//    items: { text: string, backgroundColor: string }[];
     images: string[];
     count: number;
     accountImage: string;
+    displayGrid: boolean;
 
     constructor(private imageService: ImageService) {
         // Use the component constructor to inject providers.
         this.images = [];
+        this.displayGrid = true;
     }
 
     ngOnInit(): void {
@@ -40,5 +41,10 @@ export class HeartComponent implements OnInit {
 
     tappedImage(index: number): void {
 //        Toast.makeText(`tapped ${index}`, 'short').show();
+    }
+
+    toggleDisplay(): void {
+        this.displayGrid = !this.displayGrid;
+        console.log('toggleDisplay', this.displayGrid);
     }
 }
