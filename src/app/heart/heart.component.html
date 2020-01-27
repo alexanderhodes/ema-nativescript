@@ -3,14 +3,8 @@
 </ActionBar>
 
 <ScrollView orientation="vertical" class="page page-content" (swipe)="onSwipe($event)">
-    <GridLayout rows="64, 30, *" columns="*" marginTop="8">
-        <GridLayout row="0" col="0" rows="64" columns="100, *" marginBottom="4">
-            <Image row="0" col="0" stretch="aspectFill" [src]="accountImage" class="icon"></Image>
-            <StackLayout row="0" col="1">
-                <Label text="Vorname Nachname" class="t-16"></Label>
-                <Label text="Position" class="t-16"></Label>
-            </StackLayout>
-        </GridLayout>
+    <GridLayout rows="76, 30, *" columns="*">
+        <UserHeader row="0" col="0"></UserHeader>
         <GridLayout row="1" col="0" rows="30" columns="*, *"
                     style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
             <Label row="0" col="0" text="&#xf00a;" class="fa t-24" style="text-align: center;"

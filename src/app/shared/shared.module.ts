@@ -1,21 +1,20 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
+import {UserHeaderComponent} from "~/app/shared/components/user-header/user-header.component";
 
-import { UserRoutingModule } from "./user-routing.module";
-import { UserComponent } from "./user.component";
-import { SharedModule } from "~/app/shared/shared.module";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        UserRoutingModule,
-        SharedModule
     ],
     declarations: [
-        UserComponent
+        UserHeaderComponent
+    ],
+    exports: [
+        UserHeaderComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class UserModule { }
+export class SharedModule { }

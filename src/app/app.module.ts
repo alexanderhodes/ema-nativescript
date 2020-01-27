@@ -15,7 +15,9 @@ import {HttpClientModule} from "@angular/common/http";
         HttpClientModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+    ],
+    exports: [
     ],
     schemas: [
         NO_ERRORS_SCHEMA
