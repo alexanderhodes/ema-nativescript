@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as Toast from "nativescript-toast";
 import {ImageService} from "~/app/shared/services/image.service";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
+import {Picture} from "~/app/shared/models/picture.models";
 
 @Component({
     selector: "Heart",
@@ -9,7 +10,7 @@ import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 })
 export class HeartComponent implements OnInit {
 
-    images: string[];
+    images: Picture[];
     count: number;
     accountImage: string;
     displayGrid: boolean;

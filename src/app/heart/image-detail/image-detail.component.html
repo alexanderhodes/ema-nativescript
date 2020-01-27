@@ -3,6 +3,17 @@
     <Label class="action-bar-title" [text]="index"></Label>
 </ActionBar>
 
-<GridLayout (swipe)="onSwipe($event)">
-    <Image [src]="image"></Image>
+<GridLayout rows="auto, *, 30" cols="*" margin="4" (swipe)="onSwipe($event)">
+    <Label row="0" col="0" [text]="image.name" class="t-36"></Label>
+    <Image row="1" col="0" [src]="image.url" (doubletap)="image.liked = !image.liked"></Image>
+    <GridLayout row="2" col="0" columns="30, 30, 30, *, 30">
+        <Label col="0" text="&#xf004;" class="fa t-24" style="text-align: center;"
+               [color]="image.liked? 'red' : '#737373'" (tap)="image.liked = !image.liked"></Label>
+        <Label col="1" text="&#xf075;" class="fa t-24" style="text-align: center;"
+               color="#737373"></Label>
+        <Label col="2" text="&#xf064;" class="fa t-24" style="text-align: center;"
+               color="#737373"></Label>
+        <Label col="4" text="&#xf02e;" class="fa t-24" style="text-align: center;"
+               color="#737373"></Label>
+    </GridLayout>
 </GridLayout>

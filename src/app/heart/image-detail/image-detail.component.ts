@@ -3,13 +3,14 @@ import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import {ImageService} from "~/app/shared/services/image.service";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
+import {Picture} from "~/app/shared/models/picture.models";
 
 @Component({
     selector: "ImageDetail",
     templateUrl: "./image-detail.component.html"
 })
 export class ImageDetailComponent implements OnInit {
-    image: string;
+    image: Picture;
     index: number;
 
     constructor(
