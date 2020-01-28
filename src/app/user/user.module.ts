@@ -4,12 +4,14 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { UserRoutingModule } from "./user-routing.module";
 import { UserComponent } from "./user.component";
 import { SharedModule } from "~/app/shared/shared.module";
+import {NativeScriptFormsModule} from "nativescript-angular";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         UserRoutingModule,
-        SharedModule
+        SharedModule,
+        NativeScriptFormsModule
     ],
     declarations: [
         UserComponent

@@ -17,4 +17,9 @@ export class PhoneService {
         console.log('response', response);
     }
 
+    sendSms(number: string, text: string): void {
+        const numbers = [number];
+        phone.sms(numbers, text);
+    }
+
 }

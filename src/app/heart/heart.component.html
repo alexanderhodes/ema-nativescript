@@ -8,9 +8,9 @@
         <GridLayout row="1" col="0" rows="30" columns="*, *"
                     style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
             <Label row="0" col="0" text="&#xf00a;" class="fa t-24" style="text-align: center;"
-                   (tap)="toggleDisplay(true)" [color]="this.displayGrid ? '#02556E' : '#737373'"></Label>
+                   (tap)="toggleDisplay(true)" [color]="displayGrid ? '#02556E' : '#737373'"></Label>
             <Label row="0" col="1" text="&#xf03a;" class="fa t-24" style="text-align: center;"
-                   (tap)="toggleDisplay(false)" [color]="!this.displayGrid ? '#02556E' : '#737373'"></Label>
+                   (tap)="toggleDisplay(false)" [color]="!displayGrid ? '#02556E' : '#737373'"></Label>
         </GridLayout>
         <GridLayout *ngIf="displayGrid" row="2" col="0" [rows]="gridRows" columns="*, *, *">
             <Image *ngFor="let image of images; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"

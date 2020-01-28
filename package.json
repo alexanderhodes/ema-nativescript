@@ -27,6 +27,7 @@
     "@angular/router": "~8.2.0",
     "nativescript-angular": "~8.2.0",
     "nativescript-camera": "^4.5.0",
+    "nativescript-email": "^1.5.5",
     "nativescript-geolocation": "^5.1.0",
     "nativescript-local-notifications": "^4.1.5",
     "nativescript-phone": "^1.4.1",
