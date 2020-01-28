@@ -1,12 +1,21 @@
 import {Injectable} from "@angular/core";
 import {Picture} from "~/app/shared/models/picture.models";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
     providedIn: "root"
 })
 export class ImageService {
 
-    findImages(): Picture[] {
+    private images: Picture[];
+    private images$: Subject<Picture[]>;
+
+    constructor() {
+        this.images = this.initImages();
+        this.images$ = new Subject<Picture[]>();
+    }
+
+    private initImages() {
         const images = [];
 
         images.push({name: 'Bird eye', liked: false, url:'~/images/bird-s-eye-view-of-road-during-daytime-3467150.jpg'});
@@ -29,14 +38,25 @@ export class ImageService {
         return images;
     }
 
-    findImage(index: number): Picture {
-        const images = this.findImages();
+    createSubscription(): Observable<Picture[]> {
+        return this.images$.asObservable();
+    }
 
-        return index < images.length ? images[index] : null;
+    findImages(): void {
+        this.images$.next(this.images);
+    }
+
+    findImage(index: number): Picture {
+        return index < this.images.length ? this.images[index] : null;
     }
 
     count(): number {
-        return this.findImages().length;
+        return this.images.length;
+    }
+
+    addImage(image: Picture): void {
+        this.images.push(image);
+        this.images$.next(this.images);
     }
 
 }

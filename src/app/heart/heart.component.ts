@@ -3,6 +3,8 @@ import * as Toast from "nativescript-toast";
 import {ImageService} from "~/app/shared/services/image.service";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
+import {messageType} from "tns-core-modules/trace";
+import error = messageType.error;
 
 @Component({
     selector: "Heart",
@@ -15,18 +17,30 @@ export class HeartComponent implements OnInit {
     accountImage: string;
     displayGrid: boolean;
     liked: boolean;
+    gridRows: string;
+    listRows: string;
 
     constructor(private imageService: ImageService) {
         // Use the component constructor to inject providers.
         this.images = [];
         this.displayGrid = true;
+        this.gridRows = '';
+        this.listRows = '';
     }
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
-        this.images = this.imageService.findImages();
+        this.imageService.createSubscription().subscribe((images: Picture[]) => {
+            console.log('received images', images.length);
+            if (images) {
+                this.images = images;
+                this.count = this.images.length;
+                this.gridRows = this.rowsForGrid();
+                this.listRows = this.rowsForList();
+            }
+        }, error => console.log('subscription cancelled'));
 
-        this.count = this.images.length;
+        this.imageService.findImages();
 
         this.accountImage = '~/images/account/photo-of-man-holding-phone-3475632.jpg';
     }
@@ -67,7 +81,6 @@ export class HeartComponent implements OnInit {
 
     toggleDisplay(display: boolean): void {
         this.displayGrid = display;
-        console.log('toggleDisplay', this.displayGrid);
     }
 
     toggleLike(): void {

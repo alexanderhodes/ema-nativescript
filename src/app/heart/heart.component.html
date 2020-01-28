@@ -12,12 +12,12 @@
             <Label row="0" col="1" text="&#xf03a;" class="fa t-24" style="text-align: center;"
                    (tap)="toggleDisplay(false)" [color]="!this.displayGrid ? '#02556E' : '#737373'"></Label>
         </GridLayout>
-        <GridLayout *ngIf="displayGrid" row="2" col="0" [rows]="rowsForGrid()" columns="*, *, *">
+        <GridLayout *ngIf="displayGrid" row="2" col="0" [rows]="gridRows" columns="*, *, *">
             <Image *ngFor="let image of images; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"
                    [src]="image.url" stretch="aspectFill" margin="4" (tap)="tappedImage(i)"
                    [nsRouterLink]="['../image', i]"></Image>
         </GridLayout>
-        <GridLayout *ngIf="!displayGrid" row="2" col="0" [rows]="rowsForList()">
+        <GridLayout *ngIf="!displayGrid" row="2" col="0" [rows]="listRows">
             <GridLayout [row]="i" rows="auto, *, 30" cols="*" *ngFor="let image of images; index as i" margin="4">
                 <Label row="0" col="0" [text]="image.name" class="t-24"></Label>
                 <Image row="1" col="0" [src]="image.url" (doubletap)="image.liked = !image.liked"></Image>
