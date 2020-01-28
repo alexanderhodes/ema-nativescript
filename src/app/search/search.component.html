@@ -2,7 +2,7 @@
     <Label class="action-bar-title" text="Search"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="*" class="page">
+<GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*" class="page">
     <GridLayout row="0" columns="50, auto, *" rows="50, auto, *">
         <Label text="GPS Tracking" row="0" col="0" backgroundColor="red"></Label>
         <Button text="track" row="0" col="1" (tap)="trackPosition()"></Button>
@@ -32,4 +32,5 @@
         <Label col="0" text="Foto"></Label>
         <Button text="take Foto" row="0" col="1" colSpan="2" (tap)="takePhoto()"></Button>
     </GridLayout>
+    <Image *ngIf="imageSrc" row="7" [src]="imageSrc" (tap)="reloadImage()"></Image>
 </GridLayout>
