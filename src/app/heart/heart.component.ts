@@ -80,7 +80,7 @@ export class HeartComponent implements OnInit {
     }
 
     toggleDisplay(display: boolean): void {
-        this.displayGrid = display;
+//        this.displayGrid = display;
     }
 
     toggleLike(): void {
