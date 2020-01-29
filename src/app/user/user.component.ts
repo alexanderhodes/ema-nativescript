@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {PhoneService} from "~/app/shared/services/phone.service";
 import * as Toast from "nativescript-toast";
 import {GeolocationService} from "~/app/shared/services/geolocation.service";
 import * as email from "nativescript-email";
 import {LocalStorageService} from "~/app/shared/services/local-storage.service";
 import {STORAGE_EMAIL, STORAGE_PHONE} from "~/app/shared/config/storage-keys";
+import * as Calendar from "nativescript-calendar";
 
 @Component({
     selector: "User",
@@ -14,11 +15,20 @@ export class UserComponent implements OnInit {
 
     phoneNumber: string;
     email: string;
+    // sms
     smsText: string;
+    // mail
     subject: string;
     emailText: string;
+    // calender
+    title: string;
+    start: Date;
+    end: Date;
+    location: string;
+    notes: string;
+    // tabs
     currentTab: 'contact' | 'sms' | 'email' | 'calender';
-    rows: {[key: string]: string};
+    rows: { [key: string]: string };
 
     constructor(private phoneService: PhoneService,
                 private localStorageService: LocalStorageService) {
@@ -30,11 +40,18 @@ export class UserComponent implements OnInit {
         this.subject = 'Betreff';
         this.emailText = 'Text';
         this.currentTab = 'contact';
+
+        this.start = new Date();
+        this.end = new Date();
+        this.title = '';
+        this.location = '';
+        this.notes = '';
+
         this.rows = {
             contact: '40, 40, 40',
             sms: '40, auto, 40',
             email: '40, 40, auto, 40',
-            calender: '40, 40, 40, 40, 40'
+            calender: '40, 40, 40, 40, 40, 40'
         };
     }
 
@@ -75,5 +92,29 @@ export class UserComponent implements OnInit {
                 }).then(composed => console.log('result', composed));
             }
         });
+    }
+
+    saveAppointment(): void {
+        let options = {
+            title: this.title,
+            startDate: this.start,
+            endDate: this.end,
+            location: this.location,
+            notes: this.notes,
+            calendar: null
+        };
+
+        Calendar.hasPermission().then(result => {
+            console.log('hasPermission', result);
+            if (result) {
+                this.createEvent(options);
+            } else {
+                Calendar.requestPermission().then(response => this.createEvent(options));
+            }
+        });
+    }
+
+    private createEvent(options: Calendar.CreateEventOptions): void {
+        Calendar.createEvent(options).then(result => console.log('result', result));
     }
 }

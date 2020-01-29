@@ -26,22 +26,29 @@
         </GridLayout>
         <GridLayout *ngSwitchCase="'sms'" [rows]="row('sms')" columns="40, *" margin="4">
             <Image row="0" col="0" src="font://&#xf095;" class="fa t-16"></Image>
-            <Label row="0" col="1" [text]="phoneNumber" keyboardType="phone" class="t-16"></Label>
-            <Image row="1" col="0" src="font://&#xf039;" class="fa t-16"></Image>
-            <TextView row="1" col="1" [(ngModel)]="smsText"></TextView>
+            <Label row="0" col="1" [text]="phoneNumber" class="t-16"></Label>
+            <TextField row="1" col="0" colSpan="2" wrapLine="true" [(ngModel)]="smsText"></TextField>
             <Button row="2" colSpan="2" text="senden" (tap)="sendSms()"></Button>
         </GridLayout>
         <GridLayout *ngSwitchCase="'email'" [rows]="row('email')" columns="40, *" margin="4">
             <Image row="0" col="0" src="font://&#xf0e0;" class="fa t-16"></Image>
-            <Label row="0" col="1" [text]="email" keyboardType="email" class="t-16"></Label>
-            <Image row="1" col="0" src="font://&#xf039;" class="fa t-16"></Image>
-            <TextField row="1" col="1" [(ngModel)]="subject"></TextField>
-            <Image row="2" col="0" src="font://&#xf039;" class="fa t-16"></Image>
-            <TextView row="2" col="1" [(ngModel)]="emailText"></TextView>
+            <Label row="0" col="1" [text]="email" class="t-16"></Label>
+            <TextField row="1" col="0" colSpan="2" [(ngModel)]="subject"></TextField>
+            <TextField row="2" col="0" colSpan="2" wrapLine="true" [(ngModel)]="emailText"></TextField>
             <Button row="3" colSpan="2" text="senden" (tap)="sendMail()"></Button>
         </GridLayout>
-        <GridLayout *ngSwitchCase="'calender'" [rows]="row('calender')" columns="40, *" margin="4">
-            <Label text="Calender"></Label>
+        <GridLayout *ngSwitchCase="'calender'" [rows]="row('calender')" columns="80, *" margin="4">
+            <Label row="0" col="0" text="Betreff" class="t-16"></Label>
+            <TextField row="0" col="1" [(ngModel)]="title"></TextField>
+            <Label row="1" col="0" text="Start" class="t-16"></Label>
+            <TextField row="1" col="1" [(ngModel)]="start" keyboardType="datetime"></TextField>
+            <Label row="2" col="0" text="Ende" class="t-16"></Label>
+            <TextField row="2" col="1" [(ngModel)]="end" keyboardType="datetime"></TextField>
+            <Label row="3" col="0" text="Ort" class="t-16"></Label>
+            <TextField row="3" col="1" [(ngModel)]="location"></TextField>
+            <Label row="4" col="0" text="Notizen" class="t-16"></Label>
+            <TextField row="4" col="1" [(ngModel)]="notes"></TextField>
+            <Button row="5" colSpan="2" text="senden" (tap)="saveAppointment()"></Button>
         </GridLayout>
     </GridLayout>
 
