@@ -6,7 +6,6 @@ import {NotificationService} from "~/app/shared/services/notification.service";
 import {FileService} from "~/app/shared/services/file.service";
 import * as geolocation from "nativescript-geolocation";
 import * as Camera from "nativescript-camera";
-import { Image } from "tns-core-modules/ui/image";
 import {WhatThreeWordsService} from "~/app/shared/services/what.three.words.service";
 import {WhatsThreeWords} from "~/app/shared/models/what.three.words.model";
 import {knownFolders, path, File} from "tns-core-modules/file-system";
@@ -14,6 +13,7 @@ import {ImageAsset} from "tns-core-modules/image-asset";
 import {ImageSource} from "tns-core-modules/image-source";
 import {ImageService} from "~/app/shared/services/image.service";
 import {Picture} from "~/app/shared/models/picture.models";
+import {BluetoothService} from "~/app/shared/services/bluetooth.service";
 
 @Component({
     selector: "Search",
@@ -34,7 +34,8 @@ export class SearchComponent implements OnInit {
                 private notificationService: NotificationService,
                 private fileService: FileService,
                 private whatThreeWordsService: WhatThreeWordsService,
-                private imageService: ImageService) {
+                private imageService: ImageService,
+                private bluetoothService: BluetoothService) {
         // Use the constructor to inject services.
         this.platformService.getProperties();
 //        this.notificationService.schedule();
@@ -130,5 +131,9 @@ export class SearchComponent implements OnInit {
         const oldPath = this.imageSrc;
         this.imageSrc = '';
         this.imageSrc = oldPath;
+    }
+
+    scan(): void {
+        this.bluetoothService.startScanning();
     }
 }
