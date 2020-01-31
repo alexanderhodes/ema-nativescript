@@ -33,5 +33,5 @@
         <Button text="take Foto" row="0" col="1" colSpan="2" (tap)="takePhoto()"></Button>
     </GridLayout>
     <Image *ngIf="imageSrc" row="7" [src]="imageSrc" (tap)="reloadImage()"></Image>
-    <Button col="8" text="bluetooth" (tap)="scan()" ></Button>
+    <Button row="8" text="bluetooth" (tap)="scan()"></Button>
 </GridLayout>

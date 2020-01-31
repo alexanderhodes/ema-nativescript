@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import {ConnectivityService} from "~/app/shared/services/connectivity.service";
-import {PhoneService} from "~/app/shared/services/phone.service";
-import * as Toast from "nativescript-toast";
-import {GeolocationService} from "~/app/shared/services/geolocation.service";
+import {ImageService} from "~/app/shared/services/image.service";
+import {CouchbaseService} from "~/app/shared/services/couchbase.service";
+import {Picture} from "~/app/shared/models/picture.models";
 
 @Component({
     selector: "Plus",
@@ -10,25 +9,29 @@ import {GeolocationService} from "~/app/shared/services/geolocation.service";
 })
 export class PlusComponent implements OnInit {
 
-    constructor(private connectivityService: ConnectivityService,
-                private phoneService: PhoneService,
-                private geolocationService: GeolocationService) {
+    constructor(private imageService: ImageService,
+                private couchbaseService: CouchbaseService) {
         // Use the component constructor to inject providers.
-        const connectionType = this.connectivityService.checkConnectionType();
-
-        console.log('connectionType in browse-module', connectionType);
     }
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
     }
 
-    call(): void {
-        Toast.makeText('Hello World', 'long').show();
+    storePictures(): void {
+        this.imageService.findAll().subscribe((pictures: Picture[]) => {
+            const response: string[] = this.imageService.storeImages(pictures);
 
-        const number = "+49697912293";
-//        this.phoneService.call(number);
+            response.forEach(id => {
+                const element = this.couchbaseService.get(id);
+                console.log(id, element);
+            });
 
-        this.geolocationService.getCurrentLocation();
+            console.log('-----------------------------------');
+
+            const all = this.couchbaseService.queryAll();
+            console.log('all', all);
+        })
     }
+
 }
