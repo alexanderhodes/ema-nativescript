@@ -14,6 +14,7 @@ import {ImageSource} from "tns-core-modules/image-source";
 import {ImageService} from "~/app/shared/services/image.service";
 import {Picture} from "~/app/shared/models/picture.models";
 import {BluetoothService} from "~/app/shared/services/bluetooth.service";
+import {DatabaseService} from "~/app/shared/services/database.service";
 
 @Component({
     selector: "Search",
@@ -35,7 +36,8 @@ export class SearchComponent implements OnInit {
                 private fileService: FileService,
                 private whatThreeWordsService: WhatThreeWordsService,
                 private imageService: ImageService,
-                private bluetoothService: BluetoothService) {
+                private bluetoothService: BluetoothService,
+                private databaseService: DatabaseService) {
         // Use the constructor to inject services.
         this.platformService.getProperties();
 //        this.notificationService.schedule();
@@ -101,7 +103,8 @@ export class SearchComponent implements OnInit {
                     name: fileName
                 };
 
-                this.imageService.addImage(picture);
+//                this.imageService.addImage(picture);
+                this.databaseService.insert(picture);
             }
         });
     }

@@ -39,6 +39,10 @@ export class ImageService {
         return images;
     }
 
+    findAllResourceImages(): Picture[] {
+        return this.images;
+    }
+
     createSubscription(): Observable<Picture[]> {
         return this.images$.asObservable();
     }

@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Picture} from "~/app/shared/models/picture.models";
+import {Observable, ReplaySubject} from "rxjs";
 var Sqlite = require("nativescript-sqlite");
 
 @Injectable({ providedIn: "root"})
@@ -19,53 +20,80 @@ export class DatabaseService {
         });
     }
 
-    public insert(picture: Picture): boolean {
-        return this.database.execSQL("INSERT INTO picture (url, name, liked) VALUES (?, ?, ?)",
+    public insert(picture: Picture): Observable<boolean> {
+        const subject$ = new ReplaySubject<boolean>();
+
+        this.database.execSQL("INSERT INTO picture (url, name, liked) VALUES (?, ?, ?)",
             [picture.url, picture.name, picture.liked ? 1 : 0]).then(id => {
             console.log('insert result', id);
-            return true;
+            subject$.next(true);
+            subject$.complete();
         }, error => {
             console.log('insert error', error);
-            return false;
+            subject$.error(error);
+            subject$.complete();
         });
+
+        return subject$.asObservable();
     }
 
-    public delete(picture: Picture): boolean {
-        return this.database.execSQL("DELETE FROM picture WHERE id = ?", [picture.id]).then(id => {
+    public delete(picture: Picture): Observable<boolean> {
+        const subject$ = new ReplaySubject<boolean>();
+
+        this.database.execSQL("DELETE FROM picture WHERE id = ?", [picture.id]).then(id => {
             console.log('delete result', id);
-            return true;
+            subject$.next(true);
+            subject$.complete();
         }, error => {
             console.log('delete error', error);
-            return false;
+            subject$.error(error);
+            subject$.complete();
         });
+
+        return subject$.asObservable();
     }
 
-    public update(picture: Picture): boolean {
+    public update(picture: Picture): Observable<boolean> {
+        const subject$ = new ReplaySubject<boolean>();
         const num = picture.liked ? 1 : 0;
-        return this.database.execSQL("UPDATE picture SET url = ?, name = ?, liked = ? WHERE id = ?",
+        this.database.execSQL("UPDATE picture SET url = ?, name = ?, liked = ? WHERE id = ?",
             [picture.url, picture.name, num, picture.liked]).then(res => {
             console.log('update result', res);
-            return true;
+            subject$.next(true);
+            subject$.complete();
         }, error => {
             console.log('update error', error);
-            return false;
-        })
+            subject$.error(error);
+            subject$.complete();
+        });
+
+        return subject$.asObservable();
     }
 
-    public findOne(id: string): Picture {
-        return this.database.execSQL("SELECT * FROM picture WHERE id = ?", [id]).then(row => {
+    public findOne(id: string): Observable<Picture> {
+        const subject$ = new ReplaySubject<Picture>();
+
+        this.database.execSQL("SELECT * FROM picture WHERE id = ?", [id]).then(row => {
             console.log('result', row);
             if (row) {
-                return this.createPicture(row);
+                const picture = this.createPicture(row);
+                subject$.next(picture);
+            } else {
+                subject$.next(null);
             }
-            return null;
+            subject$.complete();
         }, error => {
             console.log('find error', error);
-            return null;
-        })
+            subject$.error(error);
+            subject$.complete();
+        });
+
+        return subject$.asObservable();
     }
 
-    public findAll(): Picture[] {
+    public findAll(): Observable<Picture[]> {
+        const subject$ = new ReplaySubject<Picture[]>();
+
         const pictures = [];
         this.database.all("SELECT * FROM picture").then(rows => {
             for (let row in rows) {
@@ -74,8 +102,15 @@ export class DatabaseService {
                 const picture = this.createPicture(rows[row]);
                 pictures.push(picture);
             }
-        }, error => console.log('select error', error));
-        return pictures;
+            subject$.next(pictures);
+            subject$.complete();
+        }, error => {
+            console.log('select error', error);
+            subject$.error(error);
+            subject$.complete();
+        });
+
+        return subject$.asObservable();
     }
 
     private createPicture (row): Picture {

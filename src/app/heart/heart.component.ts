@@ -3,8 +3,7 @@ import * as Toast from "nativescript-toast";
 import {ImageService} from "~/app/shared/services/image.service";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
-import {messageType} from "tns-core-modules/trace";
-import error = messageType.error;
+import {DatabaseService} from "~/app/shared/services/database.service";
 
 @Component({
     selector: "Heart",
@@ -12,7 +11,7 @@ import error = messageType.error;
 })
 export class HeartComponent implements OnInit {
 
-    images: Picture[];
+    pictures: Picture[];
     count: number;
     accountImage: string;
     displayGrid: boolean;
@@ -20,9 +19,10 @@ export class HeartComponent implements OnInit {
     gridRows: string;
     listRows: string;
 
-    constructor(private imageService: ImageService) {
+    constructor(private imageService: ImageService,
+                private databaseService: DatabaseService) {
         // Use the component constructor to inject providers.
-        this.images = [];
+        this.pictures = [];
         this.displayGrid = true;
         this.gridRows = '';
         this.listRows = '';
@@ -30,19 +30,34 @@ export class HeartComponent implements OnInit {
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
-        this.imageService.createSubscription().subscribe((images: Picture[]) => {
-            console.log('received images', images.length);
-            if (images) {
-                this.images = images;
-                this.count = this.images.length;
-                this.gridRows = this.rowsForGrid();
-                this.listRows = this.rowsForList();
-            }
-        }, error => console.log('subscription cancelled'));
-
-        this.imageService.findImages();
+        this.databaseService.findAll().subscribe((pictures: Picture[]) => {
+            this.pictures = pictures;
+            this.count = this.pictures.length;
+            this.gridRows = this.rowsForGrid();
+            this.listRows = this.rowsForList();
+        });
 
         this.accountImage = '~/images/account/photo-of-man-holding-phone-3475632.jpg';
+        // this.imageService.createSubscription().subscribe((images: Picture[]) => {
+        //     console.log('received images', images.length);
+        //     if (images) {
+        //         this.images = images;
+        //         this.count = this.images.length;
+        //         this.gridRows = this.rowsForGrid();
+        //         this.listRows = this.rowsForList();
+        //     }
+        // }, error => console.log('subscription cancelled'));
+        //
+        // this.imageService.findImages();
+        //
+        // this.imageService.findAll().subscribe((pictures: Picture[]) => {
+        //     console.log('length', pictures);
+        //     pictures.forEach(picture => this.databaseService.insert(picture));
+        //     console.log('----------------------------------------------------');
+        //     this.databaseService.findAll().subscribe((pics: Picture[]) => {
+        //         pics.forEach(pic => console.log('PIC: ', pic));
+        //     });
+        // });
     }
 
     rowsForGrid(): string {
@@ -75,7 +90,7 @@ export class HeartComponent implements OnInit {
         return rows;
     }
 
-    tappedImage(index: number): void {
+    tappedPicture(index: number): void {
 //        Toast.makeText(`tapped ${index}`, 'short').show();
     }
 
@@ -83,9 +98,10 @@ export class HeartComponent implements OnInit {
 //        this.displayGrid = display;
     }
 
-    toggleLike(): void {
+    toggleLike(picture: Picture): void {
         console.log('toggleLike');
-        this.liked = !this.liked;
+        picture.liked = !picture.liked;
+        this.databaseService.update(picture);
     }
 
     onSwipe(args: SwipeGestureEventData): void {
