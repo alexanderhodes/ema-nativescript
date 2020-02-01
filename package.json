@@ -35,6 +35,7 @@
     "nativescript-local-notifications": "^4.1.5",
     "nativescript-phone": "^1.4.1",
     "nativescript-pushy": "^2.1.0",
+    "nativescript-sqlite": "^2.3.3",
     "nativescript-theme-core": "~1.0.6",
     "nativescript-toast": "^2.0.0",
     "reflect-metadata": "~0.1.12",
