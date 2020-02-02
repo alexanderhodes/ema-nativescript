@@ -33,7 +33,7 @@ export class ImageService {
         images.push({name: 'Photo of woman wearing yellow pants', liked: false, url:'~/images/photo-of-woman-wearing-yellow-pants-3542149.jpg'});
         images.push({name: 'White and green high rise building', liked: false, url:'~/images/white-and-green-high-rise-building-3526084.jpg'});
         images.push({name: 'White painted wall', liked: false, url:'~/images/white-painted-wall-3499125.jpg'});
-        images.push({name: 'Womain looking at Taj Mahal', liked: false, url:'~/images/woman-sitting-on-brickwall-looking-at-taj-mahal-3569566.jpg'});
+        images.push({name: 'Woman looking at Taj Mahal', liked: false, url:'~/images/woman-sitting-on-brickwall-looking-at-taj-mahal-3569566.jpg'});
         images.push({name: 'Person using black smartphone', liked: false, url:'~/images/person-using-black-smartphone-3585088.jpg'});
 
         return images;

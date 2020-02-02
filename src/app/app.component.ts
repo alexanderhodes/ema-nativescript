@@ -19,12 +19,17 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // Init your component properties here.
         // add images to database that are in resource
-        this.databaseService.findAll().subscribe(res => {
-            if (!res || res.length === 0) {
-                const images = this.imageService.findAllResourceImages();
-                images.forEach(pic => this.databaseService.insert(pic));
+        this.databaseService.deleteAll().subscribe(success => {
+            if (success) {
+                this.databaseService.findAll().subscribe(res => {
+                    if (!res || res.length === 0) {
+                        const images = this.imageService.findAllResourceImages();
+                        images.forEach(pic => this.databaseService.insert(pic));
+                    }
+                },error => console.log('findAll AppComponent', error));
             }
-        },error => console.log('error', error));
+        });
+
 
         this.connectivityService.start();
     }

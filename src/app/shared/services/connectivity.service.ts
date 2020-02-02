@@ -1,5 +1,5 @@
 import * as connectivityModule from "tns-core-modules/connectivity";
-import {getConnectionType, startMonitoring, stopMonitoring} from "tns-core-modules/connectivity";
+import {startMonitoring, stopMonitoring} from "tns-core-modules/connectivity";
 import {Injectable} from "@angular/core";
 import {Observable, ReplaySubject, Subject} from "rxjs";
 
@@ -14,6 +14,8 @@ export class ConnectivityService {
 
     constructor() {
         this.started = false;
+        this.hasInternetConnection$ = new ReplaySubject<boolean>();
+        this.connectionType$ = new ReplaySubject<string>();
     }
 
     public start(): void {
@@ -67,7 +69,7 @@ export class ConnectivityService {
                 break;
         }
 
-        console.log('connection-type', connectionType);
+        console.log('connection-type', type, connectionType);
         return connectionType;
     }
 

@@ -32,32 +32,15 @@ export class HeartComponent implements OnInit {
         // Use the "ngOnInit" handler to initialize data for the view.
         this.databaseService.findAll().subscribe((pictures: Picture[]) => {
             this.pictures = pictures;
+            console.log('---------------------------');
+            this.pictures.forEach(pic => console.log(pic));
+            console.log('---------------------------');
             this.count = this.pictures.length;
             this.gridRows = this.rowsForGrid();
             this.listRows = this.rowsForList();
         });
 
         this.accountImage = '~/images/account/photo-of-man-holding-phone-3475632.jpg';
-        // this.imageService.createSubscription().subscribe((images: Picture[]) => {
-        //     console.log('received images', images.length);
-        //     if (images) {
-        //         this.images = images;
-        //         this.count = this.images.length;
-        //         this.gridRows = this.rowsForGrid();
-        //         this.listRows = this.rowsForList();
-        //     }
-        // }, error => console.log('subscription cancelled'));
-        //
-        // this.imageService.findImages();
-        //
-        // this.imageService.findAll().subscribe((pictures: Picture[]) => {
-        //     console.log('length', pictures);
-        //     pictures.forEach(picture => this.databaseService.insert(picture));
-        //     console.log('----------------------------------------------------');
-        //     this.databaseService.findAll().subscribe((pics: Picture[]) => {
-        //         pics.forEach(pic => console.log('PIC: ', pic));
-        //     });
-        // });
     }
 
     rowsForGrid(): string {
