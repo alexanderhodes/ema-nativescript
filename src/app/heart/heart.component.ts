@@ -32,9 +32,6 @@ export class HeartComponent implements OnInit {
         // Use the "ngOnInit" handler to initialize data for the view.
         this.databaseService.findAll().subscribe((pictures: Picture[]) => {
             this.pictures = pictures;
-            console.log('---------------------------');
-            this.pictures.forEach(pic => console.log(pic));
-            console.log('---------------------------');
             this.count = this.pictures.length;
             this.gridRows = this.rowsForGrid();
             this.listRows = this.rowsForList();

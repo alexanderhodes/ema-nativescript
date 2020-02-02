@@ -3,7 +3,9 @@
 </ActionBar>
 
 <GridLayout class="page page-content">
-    <GridLayout rows="50, 30, 30, 30, 30, *">
-        <Button text="Push senden" (tap)="sendPushNotification()"></Button>
+    <GridLayout rows="50, 30, 30, 30, 30, *" cols="30, *">
+        <Label row="0" col="0" text="Token"></Label>
+        <Label row="0" col="1" [text]="deviceToken"></Label>
+        <Button row="1" rowSpan="2" text="Push senden" (tap)="sendPushNotification()"></Button>
     </GridLayout>
 </GridLayout>
