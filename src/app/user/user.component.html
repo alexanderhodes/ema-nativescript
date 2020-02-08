@@ -2,9 +2,17 @@
     <Label class="action-bar-title" text="User"></Label>
 </ActionBar>
 
-<GridLayout rows="76, 35, *" class="page page-content">
+<GridLayout rows="76, 35, 35, *" class="page page-content">
     <UserHeader row="0" col="0"></UserHeader>
-    <GridLayout row="1" col="0" rows="30" columns="*, *, *, *"
+    <GridLayout row="1" columns="auto, *, auto">
+        <GridLayout col="1" columns="44, 44, 44, 44">
+            <Label col="0" text="&#xf095;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
+            <Label col="1" text="&#xf0e0;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
+            <Label col="2" text="&#xf01c;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
+            <Label col="3" text="&#xf073;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
+        </GridLayout>
+    </GridLayout>
+    <GridLayout row="2" col="0" rows="30" columns="*, *, *, *"
                 style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
         <Label row="0" col="0" text="" text="&#xf007;" class="fa t-24" style="text-align: center;"
                [color]="currentTab === 'contact' ? '#02556E' : '#737373'" (tap)="changeTab('contact')"></Label>
@@ -16,7 +24,7 @@
                [color]="currentTab === 'calender' ? '#02556E' : '#737373'" (tap)="changeTab('calender')"></Label>
     </GridLayout>
 
-    <GridLayout row="2" col="0" [ngSwitch]="currentTab" >
+    <GridLayout row="3" col="0" [ngSwitch]="currentTab" >
         <GridLayout *ngSwitchCase="'contact'" [rows]="row('contact')" columns="40, *" margin="4">
             <Image row="0" col="0" src="font://&#xf095;" class="fa t-16" (tap)="call()"></Image>
             <TextField row="0" col="1" [(ngModel)]="phoneNumber" keyboardType="phone"></TextField>

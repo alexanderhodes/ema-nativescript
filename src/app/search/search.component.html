@@ -28,10 +28,20 @@
         <Label col="0" text="Eingabe:"></Label>
         <TextField col="1" [(ngModel)]="name" (returnPress)="onReturnPress($event)"></TextField>
     </GridLayout>
-    <GridLayout row="6" columns="100, *">
-        <Label col="0" text="Foto"></Label>
-        <Button text="take Foto" row="0" col="1" colSpan="2" (tap)="takePhoto()"></Button>
+    <GridLayout row="6" columns="*" rows="400" *ngIf="located">
+        <Mapbox
+                [accessToken]="apiToken()"
+                mapStyle="traffic_day"
+                [latitude]="latitude"
+                [longitude]="longitude"
+                hideCompass="true"
+                zoomLevel="18"
+                showUserLocation="false"
+                disableZoom="false"
+                disableRotation="false"
+                disableScroll="false"
+                disableTilt="false"
+                (mapReady)="onMapReady($event)">
+        </Mapbox>
     </GridLayout>
-    <Image *ngIf="imageSrc" row="7" [src]="imageSrc" (tap)="reloadImage()"></Image>
-    <Button row="8" text="bluetooth" (tap)="scan()"></Button>
 </GridLayout>

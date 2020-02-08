@@ -2,22 +2,23 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {WhatsThreeWords} from "~/app/shared/models/what.three.words.model";
 import {Observable, ReplaySubject} from "rxjs";
+import {ApiTokenService} from "~/app/shared/services/api-token.service";
 
 @Injectable({
     providedIn: "root"
 })
 export class WhatThreeWordsService {
 
-    private API_KEY = "";
-
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient,
+                private apiTokenService: ApiTokenService) {
 
     }
 
     get(longitude: number, latitude: number): Observable<WhatsThreeWords> {
         const subject$ = new ReplaySubject<WhatsThreeWords>();
 
-        const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${longitude}%2C${latitude}&key=${this.API_KEY}&language=de`;
+        const apiKey = this.apiTokenService.pushy;
+        const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${longitude}%2C${latitude}&key=${apiKey}&language=de`;
 
         this.httpClient.get(url).pipe().subscribe((response: WhatsThreeWords) => {
             subject$.next(response);

@@ -15,6 +15,10 @@ import {ImageService} from "~/app/shared/services/image.service";
 import {Picture} from "~/app/shared/models/picture.models";
 import {BluetoothService} from "~/app/shared/services/bluetooth.service";
 import {DatabaseService} from "~/app/shared/services/database.service";
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
+import * as mapbox from "nativescript-mapbox";
+import {ApiTokenService} from "~/app/shared/services/api-token.service";
 
 @Component({
     selector: "Search",
@@ -29,6 +33,7 @@ export class SearchComponent implements OnInit {
     words: string;
     imageSrc: string;
     count: number;
+    located: boolean;
 
     constructor(private platformService: PlatformService,
                 private geoLocationService: GeolocationService,
@@ -37,11 +42,13 @@ export class SearchComponent implements OnInit {
                 private whatThreeWordsService: WhatThreeWordsService,
                 private imageService: ImageService,
                 private bluetoothService: BluetoothService,
-                private databaseService: DatabaseService) {
+                private databaseService: DatabaseService,
+                private apiTokenService: ApiTokenService) {
         // Use the constructor to inject services.
         this.platformService.getProperties();
 //        this.notificationService.schedule();
         this.count = 0;
+        this.located = false;
     }
 
     ngOnInit(): void {
@@ -57,7 +64,26 @@ export class SearchComponent implements OnInit {
                 this.latitude = res.latitude;
                 this.longitude = res.longitude;
                 this.timestamp = res.timestamp;
+                this.located = true;
             });
+    }
+
+    onMapReady(args) {
+        // you can tap into the native MapView objects (MGLMapView for iOS and com.mapbox.mapboxsdk.maps.MapView for Android)
+        var nativeMapView = args.ios ? args.ios : args.android;
+        console.log("Mapbox onMapReady for " + (args.ios ? "iOS" : "Android") + ", native object received: " + nativeMapView);
+
+        // .. or use the convenience methods exposed on args.map, for instance:
+        args.map.addMarkers([
+            {
+                lat: this.latitude,
+                lng: this.longitude,
+                title: 'Aktuelle Position',
+                subtitle: 'Deine Position',
+                selected: true, // makes the callout show immediately when the marker is added (note: only 1 marker can be selected at a time)
+                onCalloutTap: function(){console.log("'Nice location' marker callout tapped");}
+            }]
+        );
     }
 
     takePhoto(): void {
@@ -128,6 +154,10 @@ export class SearchComponent implements OnInit {
                 this.words = response.words;
             });
         }
+    }
+
+    apiToken(): string {
+        return this.apiTokenService.mapbox;
     }
 
     reloadImage(): void {

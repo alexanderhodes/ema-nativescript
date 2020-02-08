@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Picture} from "~/app/shared/models/picture.models";
 import {Observable, ReplaySubject, Subject} from "rxjs";
-import {CouchbaseService} from "~/app/shared/services/couchbase.service";
 
 @Injectable({
     providedIn: "root"
@@ -11,7 +10,7 @@ export class ImageService {
     private images: Picture[];
     private images$: Subject<Picture[]>;
 
-    constructor(private couchbaseService: CouchbaseService) {
+    constructor() {
         this.images = this.initImages();
         this.images$ = new Subject<Picture[]>();
     }
@@ -70,17 +69,6 @@ export class ImageService {
     addImage(image: Picture): void {
         this.images.push(image);
         this.images$.next(this.images);
-    }
-
-    storeImages(images: Picture[]): string[] {
-        const response = [];
-
-        images.forEach(image => {
-            const r = this.couchbaseService.create(image);
-            response.push(r);
-        });
-
-        return response;
     }
 
 }
