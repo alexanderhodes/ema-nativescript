@@ -56,5 +56,9 @@
     <string>This app needs access to your camera for taking photos.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>This app needs access to your library to store photos.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>My custom recognition usage description. Overriding the default empty one in the plugin.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>My custom microphone usage description. Overriding the default empty one in the plugin.</string>
 </dict>
 </plist>
