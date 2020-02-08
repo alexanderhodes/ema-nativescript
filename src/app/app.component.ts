@@ -10,10 +10,13 @@ import {ConnectivityService} from "~/app/shared/services/connectivity.service";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+    index: number;
+
     constructor(private imageService: ImageService,
                 private databaseService: DatabaseService,
                 private connectivityService: ConnectivityService) {
         // Use the component constructor to inject providers.
+        this.index = 0;
     }
 
     ngOnInit(): void {
@@ -38,4 +41,9 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('destroying app component');
         this.connectivityService.stop();
     }
+
+    tapped(index: number): void {
+        this.index = index;
+    }
+
 }

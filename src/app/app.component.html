@@ -11,23 +11,23 @@
             Note that when working with font icons we recommend the usage of the verbose syntax as it
             is explicit and describes better the need to provide font icon as well as set the respective font (e.g. via class name).
          -->
-        <TabStripItem>
+        <TabStripItem (tap)="tapped(0)">
             <!--
                 Note TabStripItem will only accept single Label and/or single Image elements that it
                 will "adopt"; any other layout elements you try to specify will be ignored
             -->
             <Image src="font://&#xf015;" class="fa t-24"></Image>
         </TabStripItem>
-        <TabStripItem>
+        <TabStripItem (tap)="tapped(1)">
             <Image src="font://&#xf002;" class="fa t-24"></Image>
         </TabStripItem>
-        <TabStripItem>
+        <TabStripItem (tap)="tapped(2)">
             <Image src="font://&#xf0fe;" class="fa t-24"></Image>
         </TabStripItem>
-        <TabStripItem>
+        <TabStripItem (tap)="tapped(3)">
             <Image src="font://&#xf004;" class="fa t-24"></Image>
         </TabStripItem>
-        <TabStripItem>
+        <TabStripItem (tap)="tapped(4)">
             <Image src="font://&#xf007;" class="fa t-24"></Image>
         </TabStripItem>
     </TabStrip>

@@ -5,24 +5,15 @@
     font-family: "FontAwesome";
 }
 
-.t-48 {
-    font-size: 48;
-}
+.t-48 { font-size: 48; }
+.t-36 { font-size: 36; }
+.t-24 { font-size: 24; }
+.t-20 { font-size: 20; }
+.t-16 { font-size: 16; }
+.t-8 { font-size: 8; }
 
-.t-36 {
-    font-size: 36;
-}
-
-.t-24 {
-    font-size: 24;
-}
-
-.t-16 {
-    font-size: 16;
-}
-
-.t-8 {
-    font-size: 8;
+.font-bold {
+    font-weight: bold;
 }
 
 // Common page class
@@ -44,17 +35,25 @@
 }
 
 //Action bar
-ActionBar .action-bar-title {
-    horizontal-align: center;
+.action-bar {
+    background-color: white;
+}
+
+.action-bar-title {
+    color: $button-color;
 }
 
 TabStripItem:active {
-    background-color: $primary;
-    color: $page-icon-color;
+    background-color: $button-color;
 }
 TabStripItem {
-    background-color: $background;
-    color: $primary;
+    background-color: $white;
+}
+TabStripItem:active Image {
+    tint-color: $white;
+}
+TabStripItem Image {
+    tint-color: $button-color;
 }
 
 .icon {
@@ -62,3 +61,29 @@ TabStripItem {
     width: 60;
     border-radius: 30;
 }
+
+.button {
+    background-color: $button-color;
+    border-width: 1;
+    border-color: $button-color;
+    border-radius: 8;
+    color: white;
+    font-weight: 500;
+    margin-left: 4;
+    margin-right: 4;
+}
+
+.circle-button {
+    padding: 8;
+    verticalAlignment: center;
+    horizontalAlignment: center;
+    marginLeft: 4;
+    marginRight: 4;
+    borderRadius: 22;
+    color: $white;
+}
+
+.color-blue { color: #02556E; }
+.color-gray { color: #737373; }
+.color-accent { color: $button-color; }
+.color-white { color: $white; }
