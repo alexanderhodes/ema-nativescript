@@ -6,6 +6,7 @@ import * as email from "nativescript-email";
 import {LocalStorageService} from "~/app/shared/services/local-storage.service";
 import {STORAGE_EMAIL, STORAGE_PHONE} from "~/app/shared/config/storage-keys";
 import * as Calendar from "nativescript-calendar";
+import { screen } from "tns-core-modules/platform";
 
 @Component({
     selector: "User",
@@ -29,6 +30,8 @@ export class UserComponent implements OnInit {
     // tabs
     currentTab: 'contact' | 'sms' | 'email' | 'calender';
     rows: { [key: string]: string };
+    // design
+    columns: string;
 
     constructor(private phoneService: PhoneService,
                 private localStorageService: LocalStorageService) {
@@ -53,6 +56,8 @@ export class UserComponent implements OnInit {
             email: '40, 40, auto, 40',
             calender: '40, 40, 40, 40, 40, 40'
         };
+
+        this.columns = this.getColumnWidth();
     }
 
     ngOnInit(): void {
@@ -69,6 +74,12 @@ export class UserComponent implements OnInit {
 
     call(): void {
         this.phoneService.call(this.phoneNumber);
+    }
+
+    getColumnWidth(): string {
+        const width = screen.mainScreen.widthPixels - 176;
+        console.log('columns', `${width / 2}, 176, ${width / 2}`);
+        return `${width / 2}, 176, ${width / 2}`;
     }
 
     sendSms(): void {

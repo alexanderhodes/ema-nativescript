@@ -4,24 +4,24 @@
 
 <GridLayout rows="76, 35, 35, *" class="page page-content">
     <UserHeader row="0" col="0"></UserHeader>
-    <GridLayout row="1" columns="auto, *, auto">
-        <GridLayout col="1" columns="44, 44, 44, 44">
-            <Label col="0" text="&#xf095;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
-            <Label col="1" text="&#xf0e0;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
-            <Label col="2" text="&#xf01c;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
-            <Label col="3" text="&#xf073;" class="fa" padding="8" verticalAlignment="center" horizontalAlignment="center" backgroundColor="black" marginLeft="4" marginRight="4" borderRadius="22" color="white"></Label>
+    <GridLayout row="1" [columns]="columns">
+        <GridLayout col="1" columns="44, 44, 44, 44" verticalAlignment="center">
+            <Label col="0" text="&#xf095;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
+            <Label col="1" text="&#xf0e0;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
+            <Label col="2" text="&#xf01c;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
+            <Label col="3" text="&#xf073;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
         </GridLayout>
     </GridLayout>
     <GridLayout row="2" col="0" rows="30" columns="*, *, *, *"
                 style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
-        <Label row="0" col="0" text="" text="&#xf007;" class="fa t-24" style="text-align: center;"
-               [color]="currentTab === 'contact' ? '#02556E' : '#737373'" (tap)="changeTab('contact')"></Label>
-        <Label row="0" col="1" text="" text="&#xf2b6;" class="fa t-24" style="text-align: center;"
-               [color]="currentTab === 'sms' ? '#02556E' : '#737373'" (tap)="changeTab('sms')"></Label>
-        <Label row="0" col="2" text="" text="&#xf0e0;" class="fa t-24" style="text-align: center;"
-               [color]="currentTab === 'email' ? '#02556E' : '#737373'" (tap)="changeTab('email')"></Label>
-        <Label row="0" col="3" text="" text="&#xf133;" class="fa t-24" style="text-align: center;"
-               [color]="currentTab === 'calender' ? '#02556E' : '#737373'" (tap)="changeTab('calender')"></Label>
+        <Label row="0" col="0" text="" text="&#xf007;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'contact', 'color-gray': currentTab !== 'contact'}"
+               style="text-align: center;" (tap)="changeTab('contact')"></Label>
+        <Label row="0" col="1" text="" text="&#xf2b6;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'sms', 'color-gray': currentTab !== 'sms'}"
+               style="text-align: center;" (tap)="changeTab('sms')"></Label>
+        <Label row="0" col="2" text="" text="&#xf0e0;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'email', 'color-gray': currentTab !== 'email'}"
+               style="text-align: center;" (tap)="changeTab('email')"></Label>
+        <Label row="0" col="3" text="" text="&#xf133;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'calender', 'color-gray': currentTab !== 'calender'}"
+               style="text-align: center;" (tap)="changeTab('calender')"></Label>
     </GridLayout>
 
     <GridLayout row="3" col="0" [ngSwitch]="currentTab" >
@@ -30,20 +30,20 @@
             <TextField row="0" col="1" [(ngModel)]="phoneNumber" keyboardType="phone"></TextField>
             <Image row="1" col="0" src="font://&#xf0e0;" class="fa t-16"></Image>
             <TextField row="1" col="1" [(ngModel)]="email" keyboardType="email"></TextField>
-            <Button row="2" colSpan="2" text="speichern" (tap)="save()"></Button>
+            <Button class="button" row="2" colSpan="2" text="speichern" (tap)="save()"></Button>
         </GridLayout>
         <GridLayout *ngSwitchCase="'sms'" [rows]="row('sms')" columns="40, *" margin="4">
             <Image row="0" col="0" src="font://&#xf095;" class="fa t-16"></Image>
             <Label row="0" col="1" [text]="phoneNumber" class="t-16"></Label>
             <TextField row="1" col="0" colSpan="2" wrapLine="true" [(ngModel)]="smsText"></TextField>
-            <Button row="2" colSpan="2" text="senden" (tap)="sendSms()"></Button>
+            <Button class="button" row="2" colSpan="2" text="senden" (tap)="sendSms()"></Button>
         </GridLayout>
         <GridLayout *ngSwitchCase="'email'" [rows]="row('email')" columns="40, *" margin="4">
             <Image row="0" col="0" src="font://&#xf0e0;" class="fa t-16"></Image>
             <Label row="0" col="1" [text]="email" class="t-16"></Label>
             <TextField row="1" col="0" colSpan="2" [(ngModel)]="subject"></TextField>
             <TextField row="2" col="0" colSpan="2" wrapLine="true" [(ngModel)]="emailText"></TextField>
-            <Button row="3" colSpan="2" text="senden" (tap)="sendMail()"></Button>
+            <Button class="button" row="3" colSpan="2" text="senden" (tap)="sendMail()"></Button>
         </GridLayout>
         <GridLayout *ngSwitchCase="'calender'" [rows]="row('calender')" columns="80, *" margin="4">
             <Label row="0" col="0" text="Betreff" class="t-16"></Label>
@@ -56,7 +56,7 @@
             <TextField row="3" col="1" [(ngModel)]="location"></TextField>
             <Label row="4" col="0" text="Notizen" class="t-16"></Label>
             <TextField row="4" col="1" [(ngModel)]="notes"></TextField>
-            <Button row="5" colSpan="2" text="senden" (tap)="saveAppointment()"></Button>
+            <Button class="button" row="5" colSpan="2" text="senden" (tap)="saveAppointment()"></Button>
         </GridLayout>
     </GridLayout>
 

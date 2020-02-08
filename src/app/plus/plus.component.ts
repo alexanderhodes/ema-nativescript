@@ -1,21 +1,76 @@
-import { Component, OnInit } from "@angular/core";
-import {ImageService} from "~/app/shared/services/image.service";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
+import {SpeechService} from "~/app/shared/services/speech.service";
+import {SpeechRecognitionService} from "~/app/shared/services/speech-recognition.service";
+import * as Toast from "nativescript-toast";
+import {DialogService} from "~/app/shared/services/dialog.service";
+import {FileService} from "~/app/shared/services/file.service";
 
 @Component({
     selector: "Plus",
     templateUrl: "./plus.component.html"
 })
-export class PlusComponent implements OnInit {
+export class PlusComponent implements OnInit, OnDestroy {
 
-    constructor(private imageService: ImageService) {
+    text: string;
+    private fileName;
+
+    constructor(
+        private speechService: SpeechService,
+        private speechRecognitionService: SpeechRecognitionService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private dialogService: DialogService,
+        private fileService: FileService) {
         // Use the component constructor to inject providers.
+        this.fileName = 'aufnahme.txt';
     }
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
     }
 
-    storePictures(): void {
+    ngOnDestroy(): void {
+        this.speechService.pause();
+    }
+
+    speak(): void {
+        if (this.text) {
+            this.speechService.speak(this.text);
+        } else {
+            Toast.makeText('Es muss ein Text eingegeben sein.', 'long').show();
+        }
+    }
+
+    listen(): void {
+        this.speechRecognitionService.startListening().subscribe((text: string) => {
+            console.log('text', text);
+            this.text = text;
+            this.changeDetectorRef.detectChanges();
+        }, error => {
+            const title = 'Fehler';
+            const message = 'Beim Starten der Sprachaufnahme ist ein Fehler aufgetreten.';
+            this.dialogService.alert(title, message, 'ok');
+        });
+    }
+
+    stopListen(): void {
+        this.speechRecognitionService.stopListening();
+    }
+
+    clear(): void {
+        this.text = '';
+    }
+
+    save(): void {
+        const created = this.fileService.createFile(this.fileName, this.text);
+        if (created) {
+            const title = 'Speichern';
+            const message = `Die Datei ${this.fileName} wurde erfolgreich gespeichert`;
+            this.dialogService.alert(title, message, 'ok');
+        }
+    }
+
+    read(): void {
+        this.fileService.readFile(this.fileName).subscribe(text => this.text = text);
     }
 
 }
