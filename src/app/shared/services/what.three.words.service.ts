@@ -17,8 +17,8 @@ export class WhatThreeWordsService {
     get(longitude: number, latitude: number): Observable<WhatsThreeWords> {
         const subject$ = new ReplaySubject<WhatsThreeWords>();
 
-        const apiKey = this.apiTokenService.pushy;
-        const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${longitude}%2C${latitude}&key=${apiKey}&language=de`;
+        const apiKey = this.apiTokenService.what3words;
+        const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${latitude}%2C${longitude}&key=${apiKey}&language=de`;
 
         this.httpClient.get(url).pipe().subscribe((response: WhatsThreeWords) => {
             subject$.next(response);
