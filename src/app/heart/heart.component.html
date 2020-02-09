@@ -1,8 +1,14 @@
 <ActionBar class="action-bar">
     <Label class="action-bar-title" text="Pictures"></Label>
+    <ActionItem position="right" (tap)="takePhoto()" ios.position="right" android.position="right">
+        <StackLayout>
+            <Label text="&#xf030;" class="fa t-24" tintColor="#FF687E" color="#FF687E" marginRight="8"></Label>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 
-<ScrollView orientation="vertical" class="page page-content" (swipe)="onSwipe($event)">
+<ScrollView orientation="vertical" class="page page-content" (swipe)="onSwipe($event)" margin="8"
+            scrollBarIndicatorVisible="false">
     <GridLayout rows="76, 30, *" columns="*">
         <UserHeader row="0" col="0"></UserHeader>
         <GridLayout row="1" col="0" rows="30" columns="*, *"
@@ -14,8 +20,7 @@
         </GridLayout>
         <GridLayout *ngIf="displayGrid" row="2" col="0" [rows]="gridRows" columns="*, *, *">
             <Image *ngFor="let picture of pictures; index as i" [row]="rowForIndex(i)" [col]="colForIndex(i)"
-                   [src]="picture.url" stretch="aspectFill" margin="4" (tap)="tappedPicture(i)"
-                   [nsRouterLink]="['../image', i]"></Image>
+                   [src]="picture.url" stretch="aspectFill" margin="4" [nsRouterLink]="['../image', picture.id]"></Image>
         </GridLayout>
         <GridLayout *ngIf="!displayGrid" row="2" col="0" [rows]="listRows">
             <GridLayout [row]="i" rows="auto, *, 30" cols="*" *ngFor="let picture of pictures; index as i" margin="4">

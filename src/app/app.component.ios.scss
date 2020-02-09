@@ -10,9 +10,9 @@ TabStripItem:active Label {
 }
 
 TabStripItem Image {
-    color: $blue-dark;
+    color: $button-color;
 }
 
 TabStripItem:active Image {
-    color: $item-active-color;
+    color: $white;
 }

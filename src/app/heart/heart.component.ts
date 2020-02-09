@@ -20,7 +20,6 @@ export class HeartComponent implements OnInit {
     accountImage: string;
     displayGrid: boolean;
     imageSrc: string;
-    liked: boolean;
     gridRows: string;
     listRows: string;
 
@@ -74,10 +73,6 @@ export class HeartComponent implements OnInit {
         }
 
         return rows;
-    }
-
-    tappedPicture(index: number): void {
-//        Toast.makeText(`tapped ${index}`, 'short').show();
     }
 
     toggleDisplay(display: boolean): void {
@@ -142,8 +137,7 @@ export class HeartComponent implements OnInit {
                     name: fileName
                 };
 
-//                this.imageService.addImage(picture);
-                this.databaseService.insert(picture);
+                this.databaseService.insert(picture).subscribe(pic => this.pictures.push(pic));
             }
         });
     }

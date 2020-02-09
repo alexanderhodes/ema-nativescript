@@ -1,0 +1,31 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" text="Termin erstellen"></Label>
+</ActionBar>
+
+<ScrollView scrollBarIndicatorVisible="false">
+    <GridLayout rows="auto, auto, auto, auto, auto, auto" margin="8">
+        <StackLayout row="0">
+            <Label text="Betreff" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="title" hint="Betreff" class="border-gray"></TextField>
+        </StackLayout>
+        <StackLayout row="1">
+            <Label text="Start" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="start" hint="Beginn" keyboardType="datetime" class="border-gray"></TextField>
+        </StackLayout>
+        <StackLayout row="2">
+            <Label text="Ende" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="end" hint="Ende" keyboardType="datetime" class="border-gray"></TextField>
+        </StackLayout>
+        <StackLayout row="3">
+            <Label text="Ort" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="location" hint="Ort" class="border-gray"></TextField>
+        </StackLayout>
+        <StackLayout row="4">
+            <Label text="Notizen" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="notes" hint="Notizen" class="border-gray"></TextField>
+        </StackLayout>
+        <Button class="button" row="5" text="senden" (tap)="saveAppointment()" marginTop="8"></Button>
+    </GridLayout>
+</ScrollView>
+

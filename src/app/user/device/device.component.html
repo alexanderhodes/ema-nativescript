@@ -1,0 +1,14 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" text="Geräte-Informationen"></Label>
+</ActionBar>
+
+<ScrollView margin="8" scrollBarIndicatorVisible="false">
+    <GridLayout [rows]="rows">
+        <StackLayout [row]="i" *ngFor="let pair of values; index as i">
+            <Label [text]="pair.key" class="t-20 font-bold"></Label>
+            <Label [text]="pair.value" class="t-20"></Label>
+            <StackLayout margin="8" borderColor="#FF687E" borderWidth="1"></StackLayout>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>

@@ -12,14 +12,16 @@ export class DatabaseService {
     constructor() {
     }
 
-    public insert(picture: Picture): Observable<boolean> {
-        const subject$ = new ReplaySubject<boolean>();
+    public insert(picture: Picture): Observable<Picture> {
+        const subject$ = new ReplaySubject<Picture>();
 
         this.openDatabase().subscribe(database => {
             database.execSQL("INSERT INTO picture (url, name, liked) VALUES (?, ?, ?)",
                 [picture.url, picture.name, picture.liked ? 1 : 0]).then(id => {
                 console.log('insert result', id);
-                subject$.next(true);
+                picture.id = id;
+
+                subject$.next(picture);
                 subject$.complete();
             }, error => this.handleError(subject$, error, 'insert error'));
         }, error => this.handleError(subject$, error, 'insert database error'));

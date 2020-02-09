@@ -1,0 +1,20 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" text="E-Mail versenden"></Label>
+</ActionBar>
+
+<GridLayout rows="auto, auto, auto, auto" columns="*" margin="8">
+    <StackLayout row="0">
+        <Label text="E-Mail Adresse" class="t-20 font-bold"></Label>
+        <Label [text]="email" class="t-20"></Label>
+    </StackLayout>
+    <StackLayout row="1">
+        <Label text="Betreff" class="t-20 font-bold"></Label>
+        <TextField [(ngModel)]="subject" hint="Betreff" class="border-gray" verticalAlignment="top"></TextField>
+    </StackLayout>
+    <StackLayout row="2">
+        <Label text="Text" class="t-20 font-bold"></Label>
+        <TextView wrapLine="true" height="100" hint="Text" [(ngModel)]="emailText" class="border-gray"></TextView>
+    </StackLayout>
+    <Button class="button" row="3" text="senden" (tap)="sendMail()" marginTop="8"></Button>
+</GridLayout>

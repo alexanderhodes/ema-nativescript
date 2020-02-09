@@ -7,6 +7,8 @@
 
 .t-48 { font-size: 48; }
 .t-36 { font-size: 36; }
+.t-32 { font-size: 32; }
+.t-28 { font-size: 28; }
 .t-24 { font-size: 24; }
 .t-20 { font-size: 20; }
 .t-16 { font-size: 16; }
@@ -49,11 +51,15 @@ TabStripItem:active {
 TabStripItem {
     background-color: $white;
 }
-TabStripItem:active Image {
-    tint-color: $white;
+TabStripItem:active  {
+    Image {
+        tint-color: $white;
+    }
 }
-TabStripItem Image {
-    tint-color: $button-color;
+TabStripItem {
+    Image {
+        tint-color: $button-color;
+    }
 }
 
 .icon {
@@ -84,6 +90,11 @@ TabStripItem Image {
 }
 
 .color-blue { color: #02556E; }
-.color-gray { color: #737373; }
+.color-gray { color: $side-drawer-header-brand; }
 .color-accent { color: $button-color; }
 .color-white { color: $white; }
+
+.border-gray { border-width: 1; border-color: $side-drawer-header-brand; border-radius: 8; }
+.hr { border-color: $button-color; }
+.m-10 { margin: 10; }
+

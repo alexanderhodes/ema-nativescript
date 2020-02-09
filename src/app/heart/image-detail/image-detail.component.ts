@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import {ImageService} from "~/app/shared/services/image.service";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
+import {DatabaseService} from "~/app/shared/services/database.service";
 
 @Component({
     selector: "ImageDetail",
@@ -16,12 +17,13 @@ export class ImageDetailComponent implements OnInit {
     constructor(
         private _imageService: ImageService,
         private _route: ActivatedRoute,
-        private _routerExtensions: RouterExtensions
+        private _routerExtensions: RouterExtensions,
+        private _databaseService: DatabaseService
     ) { }
 
     ngOnInit(): void {
         this.index = +this._route.snapshot.params.index;
-        this.image = this._imageService.findImage(this.index);
+        this._databaseService.findOne(`${this.index}`).subscribe(picture => this.image = picture);
     }
 
     onBackTap(): void {
@@ -30,6 +32,7 @@ export class ImageDetailComponent implements OnInit {
 
     onSwipe(args: SwipeGestureEventData): void {
         const direction = args.direction.valueOf();
+        console.log('swipe-direction', direction);
 
         if (direction === 1 || direction === 2) {
             // direction: 1 -> -1, direction: 2 -> +1

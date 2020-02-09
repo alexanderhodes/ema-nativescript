@@ -1,64 +1,42 @@
 <ActionBar class="action-bar">
     <Label class="action-bar-title" text="User"></Label>
+    <ActionItem position="right" [nsRouterLink]="['../device']" ios.position="right" android.position="right">
+        <StackLayout>
+            <Label text="&#xf013;" class="fa t-24" tintColor="#FF687E" color="#FF687E" marginRight="8"></Label>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 
-<GridLayout rows="76, 35, 35, *" class="page page-content">
+<GridLayout rows="76, 44, auto, auto" class="page page-content" margin="8">
     <UserHeader row="0" col="0"></UserHeader>
-    <GridLayout row="1" [columns]="columns">
-        <GridLayout col="1" columns="44, 44, 44, 44" verticalAlignment="center">
-            <Label col="0" text="&#xf095;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
-            <Label col="1" text="&#xf0e0;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
-            <Label col="2" text="&#xf01c;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
-            <Label col="3" text="&#xf073;" class="fa circle-button" color="#FF687E" borderRadius="22" marginRight="4" marginLeft="4" verticalAlignment="center" horizontalAlignment="center"></Label>
+    <GridLayout row="1" columns="*, 208, *">
+        <Label col="0" text="&nbsp;"></Label>
+        <GridLayout col="1" columns="52, 52, 52, 52" verticalAlignment="center">
+            <Label col="0" text="&#xf095;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+                   minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
+                   verticalAlignment="center" horizontalAlignment="center" (tap)="tapped('phone')"></Label>
+            <Label col="1" text="&#xf075;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+                   minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
+                   verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../sms']"></Label>
+            <Label col="2" text="&#xf0e0;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+                   minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
+                   verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../email']"></Label>
+            <Label col="3" text="&#xf073;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+                   minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
+                   verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../calendar']"></Label>
         </GridLayout>
+        <Label col="2" text="&nbsp;"></Label>
     </GridLayout>
-    <GridLayout row="2" col="0" rows="30" columns="*, *, *, *"
-                style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
-        <Label row="0" col="0" text="" text="&#xf007;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'contact', 'color-gray': currentTab !== 'contact'}"
-               style="text-align: center;" (tap)="changeTab('contact')"></Label>
-        <Label row="0" col="1" text="" text="&#xf2b6;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'sms', 'color-gray': currentTab !== 'sms'}"
-               style="text-align: center;" (tap)="changeTab('sms')"></Label>
-        <Label row="0" col="2" text="" text="&#xf0e0;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'email', 'color-gray': currentTab !== 'email'}"
-               style="text-align: center;" (tap)="changeTab('email')"></Label>
-        <Label row="0" col="3" text="" text="&#xf133;" class="fa t-24" [ngClass]="{'color-blue': currentTab === 'calender', 'color-gray': currentTab !== 'calender'}"
-               style="text-align: center;" (tap)="changeTab('calender')"></Label>
+    <GridLayout row="2" col="0" rows="auto, auto, auto">
+        <StackLayout row="0">
+            <Label text="Telefonnummer" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="phoneNumber" hint="+49160 1234567" keyboardType="phone" class="border-gray"></TextField>
+        </StackLayout>
+        <StackLayout row="1">
+            <Label text="E-Mail Adresse" class="t-20 font-bold"></Label>
+            <TextField [(ngModel)]="email" hint="hallo@email.com" keyboardType="email" class="border-gray"></TextField>
+        </StackLayout>
     </GridLayout>
-
-    <GridLayout row="3" col="0" [ngSwitch]="currentTab" >
-        <GridLayout *ngSwitchCase="'contact'" [rows]="row('contact')" columns="40, *" margin="4">
-            <Image row="0" col="0" src="font://&#xf095;" class="fa t-16" (tap)="call()"></Image>
-            <TextField row="0" col="1" [(ngModel)]="phoneNumber" keyboardType="phone"></TextField>
-            <Image row="1" col="0" src="font://&#xf0e0;" class="fa t-16"></Image>
-            <TextField row="1" col="1" [(ngModel)]="email" keyboardType="email"></TextField>
-            <Button class="button" row="2" colSpan="2" text="speichern" (tap)="save()"></Button>
-        </GridLayout>
-        <GridLayout *ngSwitchCase="'sms'" [rows]="row('sms')" columns="40, *" margin="4">
-            <Image row="0" col="0" src="font://&#xf095;" class="fa t-16"></Image>
-            <Label row="0" col="1" [text]="phoneNumber" class="t-16"></Label>
-            <TextField row="1" col="0" colSpan="2" wrapLine="true" [(ngModel)]="smsText"></TextField>
-            <Button class="button" row="2" colSpan="2" text="senden" (tap)="sendSms()"></Button>
-        </GridLayout>
-        <GridLayout *ngSwitchCase="'email'" [rows]="row('email')" columns="40, *" margin="4">
-            <Image row="0" col="0" src="font://&#xf0e0;" class="fa t-16"></Image>
-            <Label row="0" col="1" [text]="email" class="t-16"></Label>
-            <TextField row="1" col="0" colSpan="2" [(ngModel)]="subject"></TextField>
-            <TextField row="2" col="0" colSpan="2" wrapLine="true" [(ngModel)]="emailText"></TextField>
-            <Button class="button" row="3" colSpan="2" text="senden" (tap)="sendMail()"></Button>
-        </GridLayout>
-        <GridLayout *ngSwitchCase="'calender'" [rows]="row('calender')" columns="80, *" margin="4">
-            <Label row="0" col="0" text="Betreff" class="t-16"></Label>
-            <TextField row="0" col="1" [(ngModel)]="title"></TextField>
-            <Label row="1" col="0" text="Start" class="t-16"></Label>
-            <TextField row="1" col="1" [(ngModel)]="start" keyboardType="datetime"></TextField>
-            <Label row="2" col="0" text="Ende" class="t-16"></Label>
-            <TextField row="2" col="1" [(ngModel)]="end" keyboardType="datetime"></TextField>
-            <Label row="3" col="0" text="Ort" class="t-16"></Label>
-            <TextField row="3" col="1" [(ngModel)]="location"></TextField>
-            <Label row="4" col="0" text="Notizen" class="t-16"></Label>
-            <TextField row="4" col="1" [(ngModel)]="notes"></TextField>
-            <Button class="button" row="5" colSpan="2" text="senden" (tap)="saveAppointment()"></Button>
-        </GridLayout>
-    </GridLayout>
-
+    <Button row="3" class="button" text="speichern" (tap)="save()" marginTop="8"></Button>
 
 </GridLayout>

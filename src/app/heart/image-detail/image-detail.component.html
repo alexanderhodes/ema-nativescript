@@ -3,7 +3,7 @@
     <Label class="action-bar-title" [text]="index"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, *, 30" cols="*" margin="4" (swipe)="onSwipe($event)">
+<GridLayout rows="auto, *, 30" cols="*" margin="4" (swipe)="onSwipe($event)" *ngIf="image">
     <Label row="0" col="0" [text]="image.name" class="t-36"></Label>
     <Image row="1" col="0" [src]="image.url" (doubletap)="image.liked = !image.liked"></Image>
     <GridLayout row="2" col="0" columns="30, 30, 30, *, 30">

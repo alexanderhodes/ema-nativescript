@@ -26,6 +26,7 @@ export class PlusComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
+        this.read();
     }
 
     ngOnDestroy(): void {
