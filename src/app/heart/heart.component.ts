@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ImageService} from "~/app/shared/services/image.service";
-import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
+import {GestureEventData, SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
 import {DatabaseService} from "~/app/shared/services/database.service";
 import * as Camera from "nativescript-camera";
@@ -9,6 +9,8 @@ import {ImageSource} from "tns-core-modules/image-source";
 import {knownFolders, path} from "tns-core-modules/file-system";
 import {FileService} from "~/app/shared/services/file.service";
 import * as Toast from "nativescript-toast";
+import {View} from "tns-core-modules/ui/core/view";
+import {Label} from "tns-core-modules/ui/label";
 
 @Component({
     selector: "Heart",
@@ -80,8 +82,16 @@ export class HeartComponent implements OnInit {
         this.displayGrid = display;
     }
 
-    toggleLike(picture: Picture): void {
-        console.log('toggleLike');
+    toggleLike(picture: Picture, event: GestureEventData, view: Label): void {
+        if (view) {
+            view.visibility = 'visible';
+            this.animateLike(view, true).then(() => {
+                view.visibility = 'hidden';
+            })
+        } else {
+            this.animateLike(event.view, false);
+        }
+
         picture.liked = !picture.liked;
         this.databaseService.update(picture);
     }
@@ -145,5 +155,23 @@ export class HeartComponent implements OnInit {
 
     message(value: string): void {
         Toast.makeText(`${value} clicked`, 'short').show();
+    }
+
+    animateLike(view: View, tall: boolean): Promise<any> {
+        return view.animate({
+            scale: { x: 0.5, y: 0.5 },
+            delay: 200,
+            duration: 500,
+        }).then(() => {
+            view.animate({
+                scale: tall ? { x: 2, y: 2 } : { x: 1.2, y: 1.2 },
+                duration: tall ? 1000 : 500
+            }).then(() => {
+                view.animate({
+                    scale: { x: 1, y: 1 },
+                    duration: 200
+                })
+            });
+        }).catch((e) => console.log(e.message));
     }
 }

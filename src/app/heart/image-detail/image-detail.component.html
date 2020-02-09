@@ -3,15 +3,17 @@
     <Label class="action-bar-title" [text]="index"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, *, 30" cols="*" margin="4" (swipe)="onSwipe($event)" *ngIf="image">
+<GridLayout rows="auto, *, 40" cols="*" margin="4" (swipe)="onSwipe($event)" *ngIf="picture">
     <StackLayout row="0" col="0">
-        <Label [text]="image.name" textWrap="true" class="t-24 font-bold"></Label>
+        <Label [text]="picture.name" textWrap="true" class="t-24 font-bold"></Label>
         <Label text="Untertitel" class="t-14"></Label>
     </StackLayout>
-    <Image row="1" col="0" [src]="image.url" (doubletap)="image.liked = !image.liked"></Image>
+    <Image row="1" col="0" [src]="picture.url" (doubletap)="toggleLike(picture, $event, like)"></Image>
+    <Label row="1" col="0" #like text="&#xf004;" class="fa t-48" style="text-align: center;" verticalAlignment="center"
+           [color]="picture.liked? 'red' : '#737373'" visibility="collapsed"></Label>
     <GridLayout row="2" col="0" columns="30, 30, 30, *, 30">
         <Label col="0" text="&#xf004;" class="fa t-24" style="text-align: center;"
-               [color]="image.liked? 'red' : '#737373'" (tap)="image.liked = !image.liked"></Label>
+               [color]="picture.liked? 'red' : '#737373'" (tap)="toggleLike(picture, $event, null)"></Label>
         <Label col="1" text="&#xf075;" class="fa t-24" style="text-align: center;"
                color="#737373" (tap)="message('comment')"></Label>
         <Label col="2" text="&#xf064;" class="fa t-24" style="text-align: center;"
