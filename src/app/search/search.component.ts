@@ -7,7 +7,7 @@ import {BluetoothService} from "~/app/shared/services/bluetooth.service";
 import {registerElement} from "nativescript-angular/element-registry";
 import {ApiTokenService} from "~/app/shared/services/api-token.service";
 import {ConnectivityService} from "~/app/shared/services/connectivity.service";
-import * as Toast from "nativescript-toast";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
 
@@ -29,7 +29,8 @@ export class SearchComponent implements OnInit {
                 private whatThreeWordsService: WhatThreeWordsService,
                 private bluetoothService: BluetoothService,
                 private apiTokenService: ApiTokenService,
-                private connectivityService: ConnectivityService) {
+                private connectivityService: ConnectivityService,
+                private toastService: ToastService) {
         // Use the constructor to inject services.
         this.located = false;
 
@@ -48,7 +49,7 @@ export class SearchComponent implements OnInit {
                 this.longitude = res.longitude;
                 this.timestamp = res.timestamp;
                 this.located = true;
-            }, error => Toast.makeText('Die Position konnte nicht ermittelt werden', 'short'));
+            }, () => this.toastService.show('Die Position konnte nicht ermittelt werden'));
     }
 
     onMapReady(args) {
@@ -77,10 +78,10 @@ export class SearchComponent implements OnInit {
                     this.nearestPlace = response.nearestPlace;
                 });
             } else {
-                Toast.makeText('Position muss zunächst ermittelt werden', 'short').show();
+                this.toastService.show('Position muss zunächst ermittelt werden');
             }
         } else {
-            Toast.makeText('Keine Internet-Verbindung', 'short').show();
+            this.toastService.show('Keine Internet-Verbindung');
         }
     }
 

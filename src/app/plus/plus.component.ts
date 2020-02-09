@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
 import {SpeechService} from "~/app/shared/services/speech.service";
 import {SpeechRecognitionService} from "~/app/shared/services/speech-recognition.service";
-import * as Toast from "nativescript-toast";
 import {DialogService} from "~/app/shared/services/dialog.service";
 import {FileService} from "~/app/shared/services/file.service";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 @Component({
     selector: "Plus",
@@ -19,7 +19,8 @@ export class PlusComponent implements OnInit, OnDestroy {
         private speechRecognitionService: SpeechRecognitionService,
         private changeDetectorRef: ChangeDetectorRef,
         private dialogService: DialogService,
-        private fileService: FileService) {
+        private fileService: FileService,
+        private toastService: ToastService) {
         // Use the component constructor to inject providers.
         this.fileName = 'aufnahme.txt';
     }
@@ -37,7 +38,7 @@ export class PlusComponent implements OnInit, OnDestroy {
         if (this.text) {
             this.speechService.speak(this.text);
         } else {
-            Toast.makeText('Es muss ein Text eingegeben sein.', 'long').show();
+            this.toastService.show('Es muss ein Text eingegeben sein.');
         }
     }
 

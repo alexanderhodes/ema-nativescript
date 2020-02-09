@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {PhoneService} from "~/app/shared/services/phone.service";
-import * as Toast from "nativescript-toast";
 import {LocalStorageService} from "~/app/shared/services/local-storage.service";
 import {STORAGE_EMAIL, STORAGE_PHONE} from "~/app/shared/config/storage-keys";
 import {PlatformService} from "~/app/shared/services/platform.service";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 @Component({
     selector: "User",
@@ -16,7 +16,8 @@ export class UserComponent implements OnInit {
 
     constructor(private phoneService: PhoneService,
                 private localStorageService: LocalStorageService,
-                private platformService: PlatformService) {
+                private platformService: PlatformService,
+                private toastService: ToastService) {
         this.phoneNumber = this.localStorageService.getValue(STORAGE_PHONE);
         this.email = this.localStorageService.getValue(STORAGE_EMAIL);
         console.log('read values', this.phoneNumber, this.email);
@@ -30,7 +31,7 @@ export class UserComponent implements OnInit {
         if (this.phoneNumber) {
             this.phoneService.call(this.phoneNumber);
         } else {
-            Toast.makeText('Es muss eine Telefonnummer gespeichert sein.', 'short').show();
+            this.toastService.show('Es muss eine Telefonnummer gespeichert sein.');
         }
     }
 
@@ -54,9 +55,13 @@ export class UserComponent implements OnInit {
 
     save(): void {
         console.log('save clicked');
-        this.localStorageService.setValue(STORAGE_EMAIL, this.email);
-        this.localStorageService.setValue(STORAGE_PHONE, this.phoneNumber);
-        Toast.makeText('gespeichert', 'short').show();
+        if (this.email) {
+            this.localStorageService.setValue(STORAGE_EMAIL, this.email);
+        }
+        if (this.phoneNumber) {
+            this.localStorageService.setValue(STORAGE_PHONE, this.phoneNumber);
+        }
+        this.toastService.show('gespeichert');
     }
 
     isIos(): boolean {

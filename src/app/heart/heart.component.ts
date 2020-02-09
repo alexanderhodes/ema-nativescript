@@ -8,9 +8,9 @@ import {ImageAsset} from "tns-core-modules/image-asset";
 import {ImageSource} from "tns-core-modules/image-source";
 import {knownFolders, path} from "tns-core-modules/file-system";
 import {FileService} from "~/app/shared/services/file.service";
-import * as Toast from "nativescript-toast";
 import {View} from "tns-core-modules/ui/core/view";
 import {Label} from "tns-core-modules/ui/label";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 @Component({
     selector: "Heart",
@@ -28,7 +28,8 @@ export class HeartComponent implements OnInit {
 
     constructor(private imageService: ImageService,
                 private fileService: FileService,
-                private databaseService: DatabaseService) {
+                private databaseService: DatabaseService,
+                private toastService: ToastService) {
         // Use the component constructor to inject providers.
         this.pictures = [];
         this.displayGrid = true;
@@ -154,7 +155,7 @@ export class HeartComponent implements OnInit {
     }
 
     message(value: string): void {
-        Toast.makeText(`${value} clicked`, 'short').show();
+        this.toastService.show(`${value} clicked`);
     }
 
     animateLike(view: View, tall: boolean): Promise<any> {

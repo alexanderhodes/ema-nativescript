@@ -4,10 +4,10 @@ import {RouterExtensions} from "nativescript-angular/router";
 import {GestureEventData, SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
 import {DatabaseService} from "~/app/shared/services/database.service";
-import * as Toast from "nativescript-toast";
 import {View} from "tns-core-modules/ui/core/view";
 import {Label} from "tns-core-modules/ui/label";
 import {PlatformService} from "~/app/shared/services/platform.service";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 @Component({
     selector: "ImageDetail",
@@ -21,7 +21,8 @@ export class ImageDetailComponent implements OnInit {
         private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions,
         private _databaseService: DatabaseService,
-        private _platformService: PlatformService
+        private _platformService: PlatformService,
+        private _toastService: ToastService
     ) { }
 
     ngOnInit(): void {
@@ -50,7 +51,7 @@ export class ImageDetailComponent implements OnInit {
     }
 
     message(value: string): void {
-        Toast.makeText(`${value} clicked`, 'short').show();
+        this._toastService.show(`${value} clicked`);
     }
 
     toggleLike(picture: Picture, event: GestureEventData, view: Label): void {

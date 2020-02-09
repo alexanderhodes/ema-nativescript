@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {getDevicePushToken, setNotificationHandler} from "nativescript-pushy";
 import {ConnectivityService} from "~/app/shared/services/connectivity.service";
-import * as Toast from "nativescript-toast";
 import {PushyService} from "~/app/shared/services/pushy.service";
+import {ToastService} from "~/app/shared/services/toast.service";
 
 @Component({
     selector: "Home",
@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
     private _type: string;
 
     constructor(private connectivityService: ConnectivityService,
-                private pushyService: PushyService) {
+                private pushyService: PushyService,
+                private toastService: ToastService) {
     }
 
     ngOnInit(): void {
@@ -38,14 +39,14 @@ export class HomeComponent implements OnInit {
             if (this.message) {
                 this.pushyService.sendNotification(this._deviceToken, this.message).subscribe(res => {
                     console.log('sendNotification', res);
-                    Toast.makeText('Benachrichtigung erfolgreich versendet', 'short').show();
+                    this.toastService.show('Benachrichtigung erfolgreich versendet');
                     this.message = '';
                 });
             } else {
-                Toast.makeText('Bitte geben Sie eine Nachricht ein', 'short').show();
+                this.toastService.show('Bitte geben Sie eine Nachricht ein');
             }
         } else {
-            Toast.makeText('Keine Internet-Verbindung', 'short').show();
+            this.toastService.show('Keine Internet-Verbindung');
         }
     }
 
@@ -76,7 +77,4 @@ export class HomeComponent implements OnInit {
         this._message = value;
     }
 
-    set type(value: string) {
-        this._type = value;
-    }
 }

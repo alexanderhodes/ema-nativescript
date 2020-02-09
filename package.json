@@ -40,7 +40,7 @@
     "nativescript-sqlite": "^2.3.3",
     "nativescript-texttospeech": "^2.0.2",
     "nativescript-theme-core": "~1.0.6",
-    "nativescript-toast": "^2.0.0",
+    "nativescript-toasty": "^3.0.0-alpha.2",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.1.0",
