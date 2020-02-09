@@ -31,4 +31,8 @@ export class DeviceComponent implements OnInit {
         return text;
     }
 
+    isIos(): boolean {
+        return this.platformService.getIsIos();
+    }
+
 }

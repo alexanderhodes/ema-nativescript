@@ -4,6 +4,7 @@ import {PhoneService} from "~/app/shared/services/phone.service";
 import {LocalStorageService} from "~/app/shared/services/local-storage.service";
 import {STORAGE_EMAIL} from "~/app/shared/config/storage-keys";
 import * as Calendar from "nativescript-calendar";
+import {PlatformService} from "~/app/shared/services/platform.service";
 
 @Component({
     selector: 'Sms',
@@ -19,7 +20,8 @@ export class CalendarComponent implements OnInit {
     notes: string;
 
     constructor(private _routerExtensions: RouterExtensions,
-                private localStorageService: LocalStorageService) {
+                private localStorageService: LocalStorageService,
+                private platformService: PlatformService) {
         this.start = new Date();
         this.end = new Date();
         this.title = '';
@@ -57,6 +59,10 @@ export class CalendarComponent implements OnInit {
 
     private createEvent(options: Calendar.CreateEventOptions): void {
         Calendar.createEvent(options).then(result => console.log('result', result));
+    }
+
+    isIos(): boolean {
+        return this.platformService.getIsIos();
     }
 
 }

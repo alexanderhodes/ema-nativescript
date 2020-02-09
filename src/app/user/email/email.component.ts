@@ -3,6 +3,7 @@ import {RouterExtensions} from "nativescript-angular";
 import {STORAGE_EMAIL} from "~/app/shared/config/storage-keys";
 import {LocalStorageService} from "~/app/shared/services/local-storage.service";
 import * as email from "nativescript-email";
+import {PlatformService} from "~/app/shared/services/platform.service";
 
 @Component({
     selector: 'Sms',
@@ -15,7 +16,8 @@ export class EmailComponent implements OnInit {
     emailText: string;
 
     constructor(private _routerExtensions: RouterExtensions,
-                private localStorageService: LocalStorageService) {
+                private localStorageService: LocalStorageService,
+                private platformService: PlatformService) {
         this.subject = 'Betreff';
         this.emailText = 'Text';
     }
@@ -38,6 +40,10 @@ export class EmailComponent implements OnInit {
                 }).then(composed => console.log('result', composed));
             }
         });
+    }
+
+    isIos(): boolean {
+        return this.platformService.getIsIos();
     }
 
 }

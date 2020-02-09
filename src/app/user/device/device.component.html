@@ -1,8 +1,6 @@
 <ActionBar class="action-bar">
-    <ActionItem position="left" (tap)="onBackTap()" ios.position="left" android.position="left" left="0">
-        <StackLayout>
-            <Label text="&#xf053;" class="fa t-24" tintColor="#FF687E" color="#FF687E" marginLeft="8"></Label>
-        </StackLayout>
+    <ActionItem position="left" (tap)="onBackTap()" ios.position="left" android.position="actionBar">
+        <Label [text]="isIos() ? '&#xf053;' : '&#xf054;'" class="fa t-24" tintColor="#FF687E" color="#FF687E" marginLeft="8" marginRight="8"></Label>
     </ActionItem>
     <Label class="action-bar-title" text="Geräte-Informationen"></Label>
 </ActionBar>

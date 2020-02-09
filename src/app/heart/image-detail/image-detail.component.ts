@@ -7,6 +7,7 @@ import {DatabaseService} from "~/app/shared/services/database.service";
 import * as Toast from "nativescript-toast";
 import {View} from "tns-core-modules/ui/core/view";
 import {Label} from "tns-core-modules/ui/label";
+import {PlatformService} from "~/app/shared/services/platform.service";
 
 @Component({
     selector: "ImageDetail",
@@ -19,7 +20,8 @@ export class ImageDetailComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions,
-        private _databaseService: DatabaseService
+        private _databaseService: DatabaseService,
+        private _platformService: PlatformService
     ) { }
 
     ngOnInit(): void {
@@ -81,5 +83,9 @@ export class ImageDetailComponent implements OnInit {
                 })
             });
         }).catch((e) => console.log(e.message));
+    }
+
+    isIos(): boolean {
+        return this._platformService.getIsIos();
     }
 }

@@ -79,6 +79,11 @@ TabStripItem {
     margin-right: 4;
 }
 
+.button:active {
+    background-color: $button-color-active;
+    color: $white-active;
+}
+
 .circle-button {
     padding: 8;
     verticalAlignment: center;
