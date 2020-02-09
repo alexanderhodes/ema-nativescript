@@ -28,6 +28,10 @@ export class PlatformService {
         console.log(`device.region ${device.region}`); //  For example "US".
     }
 
+    getIsIos() {
+        return isIOS;
+    }
+
     getValues(): PlatformPair[] {
         const array = [];
 

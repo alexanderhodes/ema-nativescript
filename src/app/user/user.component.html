@@ -12,16 +12,16 @@
     <GridLayout row="1" columns="*, 208, *">
         <Label col="0" text="&nbsp;"></Label>
         <GridLayout col="1" columns="52, 52, 52, 52" verticalAlignment="center">
-            <Label col="0" text="&#xf095;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+            <Label col="0" text="&#xf095;" class="fa t-28" [paddingTop]="isIos() ? 0 : 8" color="white" textAlignment="center" minWidth="44"
                    minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
                    verticalAlignment="center" horizontalAlignment="center" (tap)="tapped('phone')"></Label>
-            <Label col="1" text="&#xf075;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+            <Label col="1" text="&#xf075;" class="fa t-28" [paddingTop]="isIos() ? 0 : 8" color="white" textAlignment="center" minWidth="44"
                    minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
                    verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../sms']"></Label>
-            <Label col="2" text="&#xf0e0;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+            <Label col="2" text="&#xf0e0;" class="fa t-28" [paddingTop]="isIos() ? 0 : 8" color="white" textAlignment="center" minWidth="44"
                    minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
                    verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../email']"></Label>
-            <Label col="3" text="&#xf073;" class="fa t-28" paddingTop="8" color="white" textAlignment="center" minWidth="44"
+            <Label col="3" text="&#xf073;" class="fa t-28" [paddingTop]="isIos() ? 0 : 8" color="white" textAlignment="center" minWidth="44"
                    minHeight="44" backgroundColor="#FF687E" borderRadius="22" marginRight="4" marginLeft="4"
                    verticalAlignment="center" horizontalAlignment="center" [nsRouterLink]="['../calendar']"></Label>
         </GridLayout>
