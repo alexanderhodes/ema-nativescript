@@ -3,6 +3,7 @@ import {getDevicePushToken, setNotificationHandler} from "nativescript-pushy";
 import {ConnectivityService} from "~/app/shared/services/connectivity.service";
 import {PushyService} from "~/app/shared/services/pushy.service";
 import {ToastService} from "~/app/shared/services/toast.service";
+import {Vibrate} from "nativescript-vibrate";
 
 @Component({
     selector: "Home",
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    sendPushNotification() {
+    sendPushNotification(): void {
         if (this.hasConnection) {
             if (this.message) {
                 this.pushyService.sendNotification(this._deviceToken, this.message).subscribe(res => {
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    requestNotificationToken() {
+    requestNotificationToken(): void {
         if (this.hasConnection && !this._deviceToken) {
             getDevicePushToken()
                 .then(token => {
@@ -59,6 +60,13 @@ export class HomeComponent implements OnInit {
                 })
                 .catch(err => console.log(`getDevicePushToken error: ${err}`));
         }
+    }
+
+    vibrate(): void {
+        const millis = 2000;
+        this.toastService.show(`Vibration für ${millis / 1000} s startet`);
+        const vibrator = new Vibrate();
+        vibrator.vibrate(millis);
     }
 
     get deviceToken(): string {
