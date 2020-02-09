@@ -5,7 +5,7 @@
 <GridLayout rows="auto, auto, 44, 44" class="page page-content" margin="8">
     <Label col="0" class="t-20 font-bold" text="Text"></Label>
     <TextView row="1" height="200" [(ngModel)]="text" autocorrect="true" wrapLine="true" whiteSpace="normal"
-              class="border-gray" hint="Text"></TextView>
+              class="border-gray" hint="Text" fontSize="16" ></TextView>
     <GridLayout row="2" columns="auto, auto, auto" marginTop="4">
         <Button col="0" class="button" text="sprechen" (tap)="speak()"></Button>
         <Button col="1" class="button" text="aufnehmen" (tap)="listen()"></Button>

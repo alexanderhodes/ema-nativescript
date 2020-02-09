@@ -14,7 +14,7 @@
     </StackLayout>
     <StackLayout row="1">
         <Label text="Text" class="t-20 font-bold"></Label>
-        <TextView wrapLine="true" height="100" hint="Text" [(ngModel)]="smsText" class="border-gray" verticalAlignment="top"></TextView>
+        <TextView wrapLine="true" height="100" hint="Text" fontSize="16" [(ngModel)]="smsText" class="border-gray" verticalAlignment="top"></TextView>
     </StackLayout>
     <Button class="button" row="2" text="senden" (tap)="sendSms()" marginTop="8"></Button>
 </GridLayout>
