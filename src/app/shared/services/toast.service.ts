@@ -7,7 +7,7 @@ export class ToastService {
     constructor() {}
 
     show(text: string): void {
-        new Toasty({ text: text, ios: {}, position: ToastPosition.BOTTOM, yAxisOffset: 70 }).setToastDuration(ToastDuration.SHORT).show();
+        new Toasty({ text: text, ios: {}, position: ToastPosition.BOTTOM}).setToastDuration(ToastDuration.SHORT).show();
     }
 
 }
