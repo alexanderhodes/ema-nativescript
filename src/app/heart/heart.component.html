@@ -7,9 +7,9 @@
     </ActionItem>
 </ActionBar>
 
-<ScrollView orientation="vertical" class="page page-content" (swipe)="onSwipe($event)" margin="8"
+<ScrollView orientation="vertical" class="page page-content" margin="8"
             scrollBarIndicatorVisible="false">
-    <GridLayout rows="76, 30, *" columns="*">
+    <GridLayout rows="76, 30, *" columns="*" (swipe)="onSwipe($event)">
         <UserHeader row="0" col="0"></UserHeader>
         <GridLayout row="1" col="0" rows="30" columns="*, *"
                     style="margin: 2; padding: 2; border-top-width: 1; border-top-color: #02556E">
@@ -24,17 +24,20 @@
         </GridLayout>
         <GridLayout *ngIf="!displayGrid" row="2" col="0" [rows]="listRows">
             <GridLayout [row]="i" rows="auto, *, 30" cols="*" *ngFor="let picture of pictures; index as i" margin="4">
-                <Label row="0" col="0" [text]="picture.name" class="t-24"></Label>
+                <StackLayout row="0" col="0">
+                    <Label [text]="picture.name" textWrap="true" class="t-24 font-bold"></Label>
+                    <Label text="Untertitel" class="t-14"></Label>
+                </StackLayout>
                 <Image row="1" col="0" [src]="picture.url" (doubletap)="toggleLike(picture)"></Image>
                 <GridLayout row="2" col="0" columns="30, 30, 30, *, 30">
                     <Label col="0" text="&#xf004;" class="fa t-24" style="text-align: center;"
                            [color]="picture.liked? 'red' : '#737373'" (tap)="toggleLike(picture)"></Label>
                     <Label col="1" text="&#xf075;" class="fa t-24" style="text-align: center;"
-                           color="#737373"></Label>
+                           color="#737373" (tap)="message('comment')"></Label>
                     <Label col="2" text="&#xf064;" class="fa t-24" style="text-align: center;"
-                           color="#737373"></Label>
+                           color="#737373" (tap)="message('share')"></Label>
                     <Label col="4" text="&#xf02e;" class="fa t-24" style="text-align: center;"
-                           color="#737373"></Label>
+                           color="#737373" (tap)="message('bookmark')"></Label>
                 </GridLayout>
             </GridLayout>
         </GridLayout>

@@ -8,6 +8,7 @@ import {ImageAsset} from "tns-core-modules/image-asset";
 import {ImageSource} from "tns-core-modules/image-source";
 import {knownFolders, path} from "tns-core-modules/file-system";
 import {FileService} from "~/app/shared/services/file.service";
+import * as Toast from "nativescript-toast";
 
 @Component({
     selector: "Heart",
@@ -76,7 +77,7 @@ export class HeartComponent implements OnInit {
     }
 
     toggleDisplay(display: boolean): void {
-//        this.displayGrid = display;
+        this.displayGrid = display;
     }
 
     toggleLike(picture: Picture): void {
@@ -142,4 +143,7 @@ export class HeartComponent implements OnInit {
         });
     }
 
+    message(value: string): void {
+        Toast.makeText(`${value} clicked`, 'short').show();
+    }
 }

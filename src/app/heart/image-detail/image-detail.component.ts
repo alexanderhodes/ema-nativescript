@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { RouterExtensions } from "nativescript-angular/router";
-import {ImageService} from "~/app/shared/services/image.service";
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {RouterExtensions} from "nativescript-angular/router";
 import {SwipeGestureEventData} from "tns-core-modules/ui/gestures";
 import {Picture} from "~/app/shared/models/picture.models";
 import {DatabaseService} from "~/app/shared/services/database.service";
+import * as Toast from "nativescript-toast";
 
 @Component({
     selector: "ImageDetail",
@@ -15,7 +15,6 @@ export class ImageDetailComponent implements OnInit {
     index: number;
 
     constructor(
-        private _imageService: ImageService,
         private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions,
         private _databaseService: DatabaseService
@@ -32,16 +31,21 @@ export class ImageDetailComponent implements OnInit {
 
     onSwipe(args: SwipeGestureEventData): void {
         const direction = args.direction.valueOf();
-        console.log('swipe-direction', direction);
 
         if (direction === 1 || direction === 2) {
             // direction: 1 -> -1, direction: 2 -> +1
             const newIndex = this.index + (direction === 1 ? -1 : 1);
 
-            if (newIndex >= 0 && newIndex < this._imageService.count()) {
-                this.index = newIndex;
-                this.image = this._imageService.findImage(this.index);
-            }
+            this._databaseService.findOne(`${newIndex}`).subscribe((picture: Picture) => {
+               if (picture) {
+                   this.index = newIndex;
+                   this.image = picture;
+               }
+            });
         }
+    }
+
+    message(value: string): void {
+        Toast.makeText(`${value} clicked`, 'short').show();
     }
 }
