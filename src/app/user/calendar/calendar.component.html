@@ -1,5 +1,9 @@
 <ActionBar class="action-bar">
-    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <ActionItem position="left" (tap)="onBackTap()" ios.position="left" android.position="left" left="0">
+        <StackLayout>
+            <Label text="&#xf053;" class="fa t-24" tintColor="#FF687E" color="#FF687E" marginLeft="8"></Label>
+        </StackLayout>
+    </ActionItem>
     <Label class="action-bar-title" text="Termin erstellen"></Label>
 </ActionBar>
 
