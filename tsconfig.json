@@ -18,9 +18,11 @@
                 "src/*"
             ],
             "*": [
-                "./node_modules/*"
+              "./node_modules/tns-core-modules/*",
+              "./node_modules/*"
             ]
-        }
+        },
+        "skipDefaultLibCheck": true
     },
     "exclude": [
         "node_modules",

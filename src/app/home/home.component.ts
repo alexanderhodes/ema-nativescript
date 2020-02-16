@@ -4,6 +4,9 @@ import {ConnectivityService} from "~/app/shared/services/connectivity.service";
 import {PushyService} from "~/app/shared/services/pushy.service";
 import {ToastService} from "~/app/shared/services/toast.service";
 import {Vibrate} from "nativescript-vibrate";
+import * as applicationModule from "tns-core-modules/application";
+import { android as androidApp } from "tns-core-modules/application";
+import { ios as iosApp } from "tns-core-modules/application";
 
 @Component({
     selector: "Home",
@@ -67,6 +70,20 @@ export class HomeComponent implements OnInit {
         this.toastService.show(`Vibration für ${millis / 1000} s startet`);
         const vibrator = new Vibrate();
         vibrator.vibrate(millis);
+    }
+
+    showAndroidToast(): void {
+        if (applicationModule.android) {
+            // get current context of application
+            const context: android.content.Context = androidApp.context;
+            // show text
+            android.widget.Toast.makeText(context, 'Native Toast', android.widget.Toast.LENGTH_SHORT).show();
+            // native vibration
+            const vibrator: android.os.Vibrator = context.getSystemService(android.content.Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(5000);
+        } else {
+            // is ios
+        }
     }
 
     get deviceToken(): string {

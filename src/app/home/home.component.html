@@ -3,7 +3,7 @@
 </ActionBar>
 
 <GridLayout class="page page-content" margin="8">
-    <GridLayout rows="40, 40, auto, auto, auto" columns="60, *">
+    <GridLayout rows="40, 40, auto, auto, auto, auto" columns="60, *">
         <Label row="0" col="0" class="t-20 font-bold" text="Token"></Label>
         <Label row="0" col="1" class="t-20" [text]="deviceToken"></Label>
         <Label row="1" col="0" class="t-20 font-bold" text="Art"></Label>
@@ -13,6 +13,8 @@
         <Button class="button" row="3" colSpan="2" text="Push senden" (tap)="sendPushNotification()"
                 marginTop="8"></Button>
         <Button class="button" row="4" colSpan="2" text="vibrieren" (tap)="vibrate()"
+                marginTop="8"></Button>
+        <Button class="button" row="4" colSpan="2" text="android toast" (tap)="showAndroidToast()"
                 marginTop="8"></Button>
     </GridLayout>
 </GridLayout>
