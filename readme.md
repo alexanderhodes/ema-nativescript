@@ -4,10 +4,6 @@
 Ausführen von `tns preview`
 Dadurch wird ein QR-Code erzeugt, der mittels der App [Playground](https://play.google.com/store/apps/details?id=org.nativescript.play) gescannt werden. Anschließend wird die App aus der Entwicklungsumgebung in der App [Preview](https://play.google.com/store/apps/details?id=org.nativescript.preview) dargestellt.
 
-## build der APK-Datei
-Ausführen von `tns build android --release --key-store-path .keystore --key-store-password Telekom123! --key-store-alias "David Savic" --key-store-alias-password Telekom123!`
-Hierdurch wird die APK-Datei für Android erzeugt, die für die Installation bereitgestellt werden kann.
-
 ## Ausführen auf verbundenem Android-Smartphone
 Zunächst müsst ihr in den Entwickleroptionen des Smartphones das USB-Debugging aktivieren und anschließend das Smartphone per USB an den PC anschließen.
 Um den Device Identifier zu ermitteln müsst ihr den folgenden Befehl ausführen. Der Device Identifier wird benötigt, um die App auf dem Smartphone auszuführen: `tns device`
