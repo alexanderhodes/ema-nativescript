@@ -12,9 +12,7 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "scripts": {
-    "lint": "tslint \"src/**/*.ts\"",
-    "devices": "tns devices",
-    "run": "tns run --device"
+    "lint": "tslint \"src/**/*.ts\""
   },
   "dependencies": {
     "@angular/animations": "~8.2.0",
@@ -26,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "@nativescript/theme": "^2.2.1",
+    "nativescript": "^6.4.0",
     "nativescript-angular": "~8.2.0",
     "nativescript-bluetooth": "^1.3.1",
     "nativescript-calendar": "^2.1.0",
@@ -44,14 +43,16 @@
     "nativescript-vibrate": "^3.0.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
-    "tns-core-modules": "~6.1.0",
+    "script": "^0.1.4",
+    "tns-core-modules": "~6.4.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular/compiler-cli": "~8.2.0",
     "@ngtools/webpack": "~8.2.0",
+    "@types/rx": "^4.1.1",
     "codelyzer": "~4.5.0",
-    "nativescript-dev-webpack": "~1.2.0",
+    "nativescript-dev-webpack": "^1.3.0",
     "node-sass": "^4.7.1",
     "tns-platform-declarations": "^6.4.0",
     "tslint": "~5.19.0",

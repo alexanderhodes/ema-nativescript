@@ -77,10 +77,10 @@ export class HomeComponent implements OnInit {
             // get current context of application
             const context: android.content.Context = androidApp.context;
             // show text
-            android.widget.Toast.makeText(context, 'Native Toast', android.widget.Toast.LENGTH_SHORT).show();
+            android.widget.Toast.makeText(context, 'Native Toast With HMR', android.widget.Toast.LENGTH_SHORT).show();
             // native vibration
             const vibrator: android.os.Vibrator = context.getSystemService(android.content.Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(5000);
+            vibrator.vibrate(500);
         } else {
             // is ios
         }
